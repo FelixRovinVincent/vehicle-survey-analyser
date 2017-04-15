@@ -9,7 +9,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-
 public class Application {
 
 	public static final Logger logger = Logger.getLogger("Vehicle Survey Analyser");
@@ -19,14 +18,20 @@ public class Application {
 			Application app = new Application();
 			app.configureLogging();
 			logger.fine("Application started");
-			
-		//TODO Application logic
+
+			// TODO Application logic
 
 			logger.fine("End of execution.");
+		} catch (RuntimeException e) {
+			logger.warning("Application encountered exception during normal execution. Resetting application ...");
+
 		} catch (Exception e) {
-			logger.log(Level.SEVERE, "Application cannot proceed further. Please see the error logs for detailed info.",e);
+			logger.log(Level.SEVERE, "Application cannot proceed further. Please see the error logs for detailed info.",
+					e);
 		}
+
 	}
+	
 
 	public void configureLogging() {
 		try {
@@ -54,8 +59,7 @@ public class Application {
 			logger.addHandler(fileHandler);
 			logger.setUseParentHandlers(false);
 		} catch (Exception e) {
-			// The runtime won't show stack traces if the exception is thrown
-			e.printStackTrace();
+			 throw new RuntimeException("Java logger could not be configured.",e);
 		}
 	}
 }
