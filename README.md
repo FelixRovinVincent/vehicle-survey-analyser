@@ -5,13 +5,13 @@ This project is the solution to Vehicle Survey Coding Challenge offered by Acone
 
 The project caught my attention right from the first read out of the three challenges. This must be because of the following reasons:-
 
-1. I found the project to be more complex than the other two (admit to be subjective), but saw the potential to apply object oriented concepts to simplify it. Also the new additions in Java 8 like the Stream API and the java.time package could also be used to demonstrate it's usefulness. And to be honest, I believe both of these would be advantageous to better demonstrate my skills in requirements capture, application design and coding.
+1. I found the problem to be more complex than the other two (admit to be subjective), but saw the potential to apply object oriented concepts to simplify it. Also the new additions in Java 8 like the Stream API and the java.time package could also be used to demonstrate it's usefulness. And to be honest, I believe both of these would be advantageous to better demonstrate my skills in application design and coding.
 
-2. I started my career in Java with hardware integration like interfacing NFC, SmartCard readers, Fingerprint devices, RFID tag readers etc. to software mainly in Java. I felt this challenge to be interesting in that context and knew that I would really enjoy completing the challenge.
+2. I started my career in Java with hardware integration like interfacing NFC, SmartCard readers, Fingerprint devices, RFID tag readers and a lot of other hardware devices to software written mainly in Java. I felt this particular challenge to be interesting in that context and knew that I would really enjoy solving the same.
 
 ## Design and approach
 
-All the analysis and design documents I created to solve the challenge are available in the [_DOCS](https://github.com/FelixRovinVincent/vehicle-survey-analyser/tree/master/_DOCS) folder. The steps I followed to solve the chosen challenge are as follows:-
+All the analysis and design documents I have created to solve the challenge are available in the [_DOCS](https://github.com/FelixRovinVincent/vehicle-survey-analyser/tree/master/_DOCS) folder. The steps I followed to solve the chosen challenge are as follows:-
 
 1. Started the project by creating a GitHub repo.
 2. Setup configuration management using Maven.
@@ -30,11 +30,11 @@ All the analysis and design documents I created to solve the challenge are avail
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for building and testing purposes.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+What things you need to install and how to install them
 
 ```
 JDK 8
@@ -78,7 +78,8 @@ Maven can be considered as complete project development tool not just a build to
 
 #### Git (Optional and not necessary if the above Eclipse package is installed)
 
-Git is a free and open source distributed version control system. 
+Git is a free and open source distributed version control system.
+
 [Git](https://git-scm.com/downloads)
 
 
