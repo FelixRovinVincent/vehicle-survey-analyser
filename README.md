@@ -1,5 +1,32 @@
 # Vehicle Survey Data Analyser
-This project is created to be used as the solution to Vehicle Survey Coding Challenge offered by Aconex. The application is mainly an analyser for the survey data supposedly recorded by vehicle counter owned by the city government mentioned in the problem statement.
+This project is the solution to Vehicle Survey Coding Challenge offered by Aconex. The application is mainly an analyser for the survey data supposedly recorded by vehicle counter owned by the city government mentioned in the problem statement.
+
+## Why I chose Vehicle Survey Coding Challenge
+
+The project caught my attention right from the first read out of the three challenges. This must be because of the following reasons:-
+
+1. I found the project to be more complex than the other two (admit to be subjective), but saw the potential to apply object oriented concepts to simplify it. Also the new additions in Java 8 like the Stream API and the java.time package could also be used to demonstrate it's usefulness. And to be honest, I believe both of these would be advantageous to better demonstrate my skills in requirements capture, application design and coding.
+
+2. I started my career in Java with hardware integration like interfacing NFC, SmartCard readers, Fingerprint devices, RFID tag readers etc. to software mainly in Java. I felt this challenge to be interesting in that context and knew that I would really enjoy completing the challenge.
+
+## Design and approach
+
+All the analysis and design documents I created to solve the challenge are available in the [_DOCS](https://github.com/FelixRovinVincent/vehicle-survey-analyser/tree/master/_DOCS) folder. The steps I followed to solve the chosen challenge are as follows:-
+
+1. Started the project by creating a GitHub repo.
+2. Setup configuration management using Maven.
+3. Configured logging with java.util.logging.
+4. Added Static Analysis capability to the project.
+5. Textual Analysis of the Problem Statement done.
+6. Create README to include the deliverables:-
+	a. An explanation on why I selected the chosen problem
+	b. Clear and concise instruction on how to execute the solution to the challenge.
+7. Requirements Diagram to ensure that no requirements are missed during design.
+8. Code Design using UML Class Diagram
+9. Write Unit Tests against crucial methods.
+10. Write Integration tests including negative scenarios.
+11. Write test-driven production code as implementation of the design. Running tests to confirm implementation logic, static analysis of the code followed by corrections/improvements are repeated in sequence after implementing a portion of the solution. This would be the last deliverable.
+12. Ensure everything is OK. Submit the solution via email including the link to GitHub repo.
 
 ## Getting Started
 
@@ -23,16 +50,16 @@ Git (Optional)
 ```
 ### Installing
 
-```
-JDK 8
-```
+
+#### JDK 8
+
 Java Development Kit 8 is used to setup the development environment. Java 8 has new features like Stream API and the java.time package which is used in the project. Detailed instructions to install and setup Java on your system is provided in the link below:-
 
 [JDK 8 Installation](https://docs.oracle.com/javase/8/docs/technotes/guides/install/install_overview.html)
 
-```
-Eclipse IDE (Optional but recommended)
-```
+
+#### Eclipse IDE (Optional but recommended)
+
 Eclipse is chosen as the IDE because of it's extensive community support and plugins and also since it is most mature. I have used Eclipse version 4.6 (Neon) and the package used is Eclipse IDE for Java Developers. This package includes everything else other than Java 8 which would help us to quickly build, run and test the solution. It includes:
 
     Git integration for Eclipse
@@ -41,52 +68,74 @@ Eclipse is chosen as the IDE because of it's extensive community support and plu
 
 [Eclipse installation](https://eclipse.org/downloads/packages/eclipse-ide-java-developers/neon3)
 
-```
-Maven (Optional and not necessary if the above Eclipse package is installed)
-```
+
+#### Maven (Optional and not necessary if the above Eclipse package is installed)
+
 Maven can be considered as complete project development tool not just a build tool. I use Maven in almost all of my projects because it allows a lot of automation to be done in configuration management of the project. Just in case, you don't have Maven, instructions here:
 
 [Maven installation](http://maven.apache.org/guides/getting-started/maven-in-five-minutes.html)
 
-```
-Git (Optional and not necessary if the above Eclipse package is installed)
-```
+
+#### Git (Optional and not necessary if the above Eclipse package is installed)
+
 Git is a free and open source distributed version control system. 
 [Git](https://git-scm.com/downloads)
 
 
 ## Build and Deploy
 
+### Clone from GitHub
 Clone the project from GitHub using the following link:-
 [vehicle-survey-analyser
 ](https://github.com/FelixRovinVincent/vehicle-survey-analyser.git)
 
-use the following Maven command in Command Line:
+### Build using Maven
+Use the following Maven command in Command Line:
+```
 mvn clean install -e
-This would compile and build runnable Jar file "vehicle-survey-analyser-0.0.1-SNAPSHOT.jar" which can be found in "target" folder.
+```
+This would compile, run tests and build runnable Jar file "vehicle-survey-analyser-0.0.1-SNAPSHOT.jar" which can be found in "target" folder.
+
+### Run executable Jar file
+Navigate to the "target" folder in project from Terminal(Command Line) and use the following command:
+```
+java -jar vehicle-survey-analyser-0.0.1-SNAPSHOT.jar
+```
+
+If you copy the jar file to some other location, please make sure that you place the data file to be analysed in a folder named "data" and place the folder in the same directory that the Excecutable Jar file is in.
+
+### Note:-
+I have included an Eclipse launch configuration for convenience to quickly enable you to build the project. Right click on the project folder in Eclipse IDE and choose "Run As"-> "Maven Build". Choose "vehicle-survey-analyser - Production" configuration and it will compile, execute tests, build runnable Jar and additionally do static analysis using SonarQube. But I am not sure if it would work right away in all platforms. I have checked with Windows 10 OS and Eclipse Neon and it works. 
+## Code Quality and Tests
+
+I have used Sonar Qube to ensure Code Quality and TestNG for automated tests.
+
+### SonarQube
+
+SonarQube is a leading platform for continuous The leading platform for Continuous Code Quality and covers the 7 sections of code quality
+
+    Architecture and Design
+    Unit tests
+    Duplicated code
+    Potential bugs
+    Complex code
+    Coding standards
+    Comments
+    
+[SonarQube](https://www.sonarqube.org/)
+
+The SonarQube Code Quality report for the project can be accessed from the following link:-
+[Static analysis of the project](http://162.212.130.161:9000/sonar/dashboard?id=com.citygovernment.vehiclesurvey%3Avehicle-survey-analyser)
 
 Note:-
-I have included an Eclipse launch configuration for convenience to quickly enable you to build the project. Right click on the project folder in Eclipse IDE and choose "Run As"-> "Maven Build". Choose "vehicle-survey-analyser - Production" configuration and it will compile, execute tests, do static analysis using SonarQube and also build runnable Jar.
+I have included an Eclipse launch configuration for convenience to quickly enable you to run static analysis on the project. Right click on the project folder in Eclipse IDE and choose "Run As"-> "Maven Build". Choose "vehicle-survey-analyser - Production" configuration and it will compile, execute tests, build runnable Jar and additionally do static analysis using SonarQube. But I am not sure if it would work right away in all platforms. I have checked with Windows 10 OS and Eclipse Neon and it works. The SonarQube configured for the project is hosted on a private server owned by me and is only temporary.
 
-## Running the tests
 
-Explain how to run the automated tests for this system
+### TestNG
 
-### Break down into end to end tests
+TestNG is a testing framework inspired from JUnit and NUnit but introducing some new functionalities that make it more powerful and easier to use.
 
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
+[TestNG](http://testng.org/doc/)
 
 
 ## Built With
@@ -103,5 +152,5 @@ Give an example
 
 ## Acknowledgments
 
-* The people at Aconex who have provided me an opportunity to solve this coding challenge
+* The people at Aconex who have given me an opportunity to solve this coding challenge.
 
