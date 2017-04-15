@@ -1,0 +1,234 @@
+
+<html>
+<head>
+<META content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
+<META author="Felix Rovin Vincent" keywords="" />
+<link rel="stylesheet" type="text/css" href="report.css" />
+<link rel="stylesheet" type="text/css" href="template_style.css" />
+<title>Report1
+</title>
+</head>
+	<body>
+		<div style="width:100%">
+			<table width="100%" cellpadding="0" border="0" cellspacing="0">
+				<tr>
+					<td>
+						<font class="Heading1_0040VP_0041"><span>1. Problem Statement : </span>
+						</font>
+						<font class="Heading1_0040VP_0041"><span>Problem Statement</span>
+						</font>
+					</td>
+				</tr>
+				<tr>
+					<td class="Documentation"><span><p class="Default"><html>
+  <head>
+    <style type="text/css">
+      <!--
+        body { color: #000000; font-family: Dialog; font-size: 22px }
+      -->
+    </style>
+    
+  </head>
+  <body>
+    <p>
+      <font size="18px" style="font-size:18px;"><b>Legend&nbsp;</b></font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;"><span bgcolor="#bb4dff" style="background-color:#bb4dff;">Candidate</span></font><font size="14px" style="font-size:14px;"><span bgcolor="#bb4dff" style="background-color:#bb4dff;"> 
+      Actor</span></font><font size="14px" style="font-size:14px;">&nbsp;</font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;"><span bgcolor="#ff4d7f" style="background-color:#ff4d7f;">Candidate 
+      Use Case</span>&nbsp;</font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;"><span bgcolor="#90cb48" style="background-color:#90cb48;">Candidate 
+      Requirement</span>&nbsp;</font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;"><span bgcolor="#00aaed" style="background-color:#00aaed;">Candidate 
+      Class</span>&nbsp;</font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;"><span bgcolor="#ffff00" style="background-color:#ffff00;">Points 
+      to note</span></font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;">&nbsp;</font>
+    </p>
+    <p>
+      <font size="18px" style="font-size:18px;"><span bgcolor="#00aaed" style="background-color:#00aaed;"><b>Vehicle</b></span><b> 
+      Survey Code Challenge </b></font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;">A small <span bgcolor="#bb4dff" style="background-color:#bb4dff;">city 
+      government</span> recently bought a <span bgcolor="#00aaed" style="background-color:#00aaed;">vehicle 
+      counter</span>. In order for the <span bgcolor="#00aaed" style="background-color:#00aaed;">vehicle 
+      counter</span> to work, pneumatic rubber hoses are stretched across the 
+      road. <span bgcolor="#00aaed" style="background-color:#00aaed;">Data</span> 
+      is produced by the <span bgcolor="#00aaed" style="background-color:#00aaed;">vehicle 
+      counter</span> as traffic drives across the hoses. The <span bgcolor="#bb4dff" style="background-color:#bb4dff;">city 
+      government</span> requires a program to <span bgcolor="#ff4d7f" style="background-color:#ff4d7f;">interpret 
+      the data</span> that the machine produces. </font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;">The <span bgcolor="#00aaed" style="background-color:#00aaed;">data</span> 
+      from the machine looks like this: </font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;"><b>A268981 </b></font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;"><b>A269123</b></font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;"><b>A604957</b></font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;"><b>B604960</b></font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;"><b>A605128</b></font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;"><b>B605132</b></font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;"><b>A1089807</b></font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;"><b>B1089810</b></font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;"><b>A1089948</b></font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;"><b>B1089951</b>&nbsp;</font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;">The numbers are the <span bgcolor="#ffff00" style="background-color:#ffff00;">number 
+      of milliseconds since midnight</span> when the mark occurred. Thus, the 
+      first line above represents a pair of tires driving by at 12:04:28am. 
+      The second line represents another pair of tires going by 142ms later 
+      (almost certainly the 2nd axle of the car). </font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;">The <span bgcolor="#00aaed" style="background-color:#00aaed;">vehicle 
+      counter</span> has two pneumatic rubber hoses - one stretches across 
+      both lanes of traffic, and one goes just across traffic in one <span bgcolor="#00aaed" style="background-color:#00aaed;">direction</span>. 
+      Each hose independently records when tires drive over it. As such, cars 
+      going in one <span bgcolor="#00aaed" style="background-color:#00aaed;">direction</span> 
+      (say, northbound) only <span bgcolor="#00aaed" style="background-color:#00aaed;">record</span> 
+      on one <span bgcolor="#00aaed" style="background-color:#00aaed;">sensor</span> 
+      (preceded with an <span bgcolor="#ffff00" style="background-color:#ffff00;">'A'</span>), 
+      while cars going in the <span bgcolor="#00aaed" style="background-color:#00aaed;">direction</span> 
+      (say, southbound) are recorded on both sensors. Lines 3-6 above 
+      represent a second car going in the other <span bgcolor="#00aaed" style="background-color:#00aaed;">direction</span>. 
+      The first set of tires hit the <span bgcolor="#ffff00" style="background-color:#ffff00;">'A'</span>&nbsp;<span bgcolor="#00aaed" style="background-color:#00aaed;">sensor</span> 
+      at 12:10:04am, and then hit the <span bgcolor="#ffff00" style="background-color:#ffff00;">'B'</span>&nbsp;<span bgcolor="#00aaed" style="background-color:#00aaed;">sensor</span> 
+      3ms later. The second set of tires then hit the <span bgcolor="#ffff00" style="background-color:#ffff00;">'A'</span>&nbsp;<span bgcolor="#00aaed" style="background-color:#00aaed;">sensor</span> 
+      171ms later, and then the <span bgcolor="#ffff00" style="background-color:#ffff00;">'B'</span>&nbsp;<span bgcolor="#00aaed" style="background-color:#00aaed;">sensor</span> 
+      4ms later. </font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;">The machine was left to run 
+      for 5 days in a row (starting on a Monday). This is obvious because the <span bgcolor="#ffff00" style="background-color:#ffff00;">times 
+      in the data make several sudden drops</span>: </font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;"><b>A86328771</b>&nbsp;</font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;"><b>B86328774</b>&nbsp;</font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;"><b>A86328899</b>&nbsp;</font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;"><b>B86328902</b>&nbsp;</font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;"><b>A582668</b>&nbsp;</font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;"><b>B582671</b>&nbsp;</font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;"><b>A582787</b>&nbsp;</font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;"><b>B582789</b>&nbsp;</font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;">The city has asked you to see 
+      how many <span bgcolor="#00aaed" style="background-color:#00aaed;">analysis 
+      features</span> you can provide: </font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;">&#8226; Total <span bgcolor="#00aaed" style="background-color:#00aaed;">vehicle</span> 
+      counts in each <span bgcolor="#00aaed" style="background-color:#00aaed;">direction</span>: 
+      <span bgcolor="#90cb48" style="background-color:#90cb48;">morning versus 
+      evening</span>, <span bgcolor="#90cb48" style="background-color:#90cb48;">per 
+      hour</span>, <span bgcolor="#90cb48" style="background-color:#90cb48;">per 
+      half hour</span>, <span bgcolor="#90cb48" style="background-color:#90cb48;">per 
+      20 minutes</span>, and <span bgcolor="#90cb48" style="background-color:#90cb48;">per 
+      15 minutes</span>. </font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;">&#8226; The above counts can be 
+      displayed <span bgcolor="#90cb48" style="background-color:#90cb48;">for 
+      each day of the session</span>, or you can see <span bgcolor="#90cb48" style="background-color:#90cb48;">averages 
+      across all the days</span>. </font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;">&#8226; <span bgcolor="#90cb48" style="background-color:#90cb48;">Peak 
+      volume times</span>. </font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;">&#8226; <span bgcolor="#90cb48" style="background-color:#90cb48;">The 
+      (rough) speed distribution of traffic</span>. </font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;">&#8226; <span bgcolor="#90cb48" style="background-color:#90cb48;">Rough 
+      distance between cars during various periods</span>. </font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;">Luckily for you, you know 
+      that: </font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;">&#8226; <span bgcolor="#ffff00" style="background-color:#ffff00;">The 
+      speed limit on the road where this is recorded is 60kph</span> (that 
+      doesn't mean that everyone drives this speed, or that no one exceeds it, 
+      but it's a good starting point). </font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;">&#8226; The <span bgcolor="#ffff00" style="background-color:#ffff00;">average 
+      wheelbase of cars in the city is around 2.5 metres between axles</span>. </font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;">&#8226; <span bgcolor="#ffff00" style="background-color:#ffff00;">Only 
+      2-axle vehicles</span> were allowed on this road during the recording 
+      sessions. </font>
+    </p>
+    <p>
+      <font size="14px" style="font-size:14px;">This coding challenge should 
+      be accompanied with a <span bgcolor="#00aaed" style="background-color:#00aaed;">data</span> 
+      file containing the full <span bgcolor="#00aaed" style="background-color:#00aaed;">vehicle</span> 
+      survey <span bgcolor="#00aaed" style="background-color:#00aaed;">data</span> 
+      to be <span bgcolor="#ff4d7f" style="background-color:#ff4d7f;">analysed</span> 
+      by the program.</font>
+    </p>
+  </body>
+</html>
+</p></span>
+					</td>
+				</tr>
+				<tr>
+					<td>
+					</td>
+				</tr>
+			</table>
+		</table>
+	</body>
+</html>
