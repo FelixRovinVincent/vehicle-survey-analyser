@@ -13,20 +13,22 @@ The project caught my attention right from the first read out of the three chall
 
 All the analysis and design documents I have created to solve the challenge are available in the [_DOCS](https://github.com/FelixRovinVincent/vehicle-survey-analyser/tree/master/_DOCS) folder. The steps I followed to solve the chosen challenge are as follows:-
 
-1. Started the project by creating a GitHub repo.
+1. Start the project by creating a GitHub repo.
 2. Setup configuration management using Maven.
-3. Configured logging with java.util.logging.
-4. Added Static Analysis capability to the project.
-5. Textual Analysis of the Problem Statement done.
-6. Create README to include the deliverables:-
-	a. An explanation on why I selected the chosen problem
+3. Configure logging with java.util.logging.
+4. Add Static Analysis capability to the project.
+5. Textual Analysis of the Problem Statement and other documents if any prepared in requirements gathering. It helps to identify and fix requirements, Actors, User stories, and most likely much of the System test cases, some of the Classes and their behaviour etc.
+6. Create README to include the following deliverables:
+	a. An explanation on why I selected the chosen problem.
 	b. Clear and concise instruction on how to execute the solution to the challenge.
-7. Requirements Diagram to ensure that no requirements are missed during design.
-8. Code Design using UML Class Diagram
-9. Write Unit Tests against crucial methods.
-10. Write Integration tests including negative scenarios.
-11. Write test-driven production code as implementation of the design. Running tests to confirm implementation logic, static analysis of the code followed by corrections/improvements are repeated in sequence after implementing a portion of the solution. This would be the last deliverable.
-12. Ensure everything is OK. Submit the solution via email including the link to GitHub repo.
+7. Requirements Diagram which helps to ensure that no requirements are missed during design.
+8. Identify and write System Test cases. The examples mentioned in the problem statement such as the explanation on how the data will be interpreted etc. are definitely System Test Case candidates.
+9. Code design using UML Class Diagram.
+10. Write Unit Tests especially against crucial methods.
+11. Write Integration tests including negative scenarios.
+12. Write test-driven production code as implementation of the design. Running tests to confirm implementation logic, static analysis of the code followed by corrections/improvements are repeated in sequence after implementing a portion of the solution. This would be the last deliverable.
+13. Refactor code. There will always be room for improvement. But, hopefully the refactoring will be minimum as otherwise it would be a sign of poor application design.
+14. Ensure everything is OK. Submit the solution via email including the link to GitHub repo..
 
 ## Getting Started
 
