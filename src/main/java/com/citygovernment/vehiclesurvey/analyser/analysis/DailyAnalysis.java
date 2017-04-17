@@ -2,6 +2,11 @@ package com.citygovernment.vehiclesurvey.analyser.analysis;
 
 import java.util.ArrayList;
 
+/**
+ * Model Class to represent analysis per day.
+ * @author Felix Rovin Vincent
+ *
+ */
 public class DailyAnalysis {
 
 	private int day;
@@ -18,6 +23,4 @@ public class DailyAnalysis {
 		return vehiclesPassed;
 	}
 	
-	
-
 }

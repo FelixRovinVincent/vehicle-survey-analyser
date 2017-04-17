@@ -3,6 +3,12 @@ package com.citygovernment.vehiclesurvey.analyser.display;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * The Enumeration which includes all possible time slices.
+ * 
+ * @author Felix Rovin Vincent
+ *
+ */
 public enum ReportPeriod {
 	AM_PM(Duration.ZERO.plus(1, ChronoUnit.HALF_DAYS)),
 	HOURLY(Duration.ZERO.plus(1, ChronoUnit.HOURS)),

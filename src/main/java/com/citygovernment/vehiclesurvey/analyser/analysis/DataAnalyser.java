@@ -9,12 +9,24 @@ import com.citygovernment.vehiclesurvey.analyser.Application;
 import com.citygovernment.vehiclesurvey.analyser.data.SensorData;
 import com.citygovernment.vehiclesurvey.analyser.data.SensorDataRecord;
 
+/**
+ * Instance of this class is used for Data analysis.
+ * 
+ * @author Felix Rovin Vincent
+ *
+ */
 public class DataAnalyser {
 	
 	public static final float	AVERAGE_WHEEL_BASE	= 2.5f;
 	public static final int		MAX_SPEED_LIMIT		= 60;
 	public static final int		NUMBER_OF_AXLES		= 2;
 	
+	/**
+	 * Method to perform analysis.
+	 * 
+	 * @param data Data to be analysed.
+	 * @return
+	 */
 	public Analysis analyse(SensorData data) {
 		
 		Analysis analysis = new Analysis();
@@ -87,6 +99,14 @@ public class DataAnalyser {
 		return analysis;
 	}
 	
+	/**
+	 * Set properties of each vehicle.
+	 * 
+	 * @param firstAxleHit Time of sensing a vehicle for the first time
+	 * @param sensorDataRecord Individual record
+	 * @param currentVehicle Record considered at present
+	 * @param currentDailyAnalysis DailyAnalysis considered at present
+	 */
 	private void setPropertiesOfVehicle(LocalTime firstAxleHit, SensorDataRecord sensorDataRecord, Vehicle currentVehicle, DailyAnalysis currentDailyAnalysis) {
 		Duration duration = Duration.between(firstAxleHit, sensorDataRecord.getLocalTime());
 		currentVehicle.setPassingTime(firstAxleHit.plus(duration.dividedBy(NUMBER_OF_AXLES)));

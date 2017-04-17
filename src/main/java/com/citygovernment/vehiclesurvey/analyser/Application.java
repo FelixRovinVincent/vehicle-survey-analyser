@@ -24,11 +24,52 @@ import com.citygovernment.vehiclesurvey.analyser.display.report.PeakVolumeTimesR
 import com.citygovernment.vehiclesurvey.analyser.display.report.SpeedDistributionReport;
 import com.citygovernment.vehiclesurvey.analyser.parser.PneumaticDataFileParser;
 
+/**
+ * The main class where execution starts. The class is made Thread-safe Singleton.
+ * 
+ * @author Felix Rovin Vincent
+ *
+ */
 public class Application {
 	
+/**
+ * Private static variable of the same class that is the only instance of the class.
+ */
+private static Application instance;
+    
+    /**
+     * Private constructor to restrict instantiation of the class from other classes.
+     */
+    private Application(){}
+    
+    /**
+     * Public static method that returns the instance of the class, this is the global access point for outer world to get the instance of the singleton class.
+     * @return an instance of Application
+     */
+    public static Application getInstance(){
+        if(instance == null){
+            synchronized (Application.class) {
+                if(instance == null){
+                    instance = new Application();
+                }
+            }
+        }
+        return instance;
+    }
+	
+	/**
+	 * Java util logger to be used through out the application.
+	 */
 	public static final Logger				LOGGER				= Logger.getLogger("Vehicle Survey Analyser");
+	/**
+	 * Default timeformat to be used through out the application.
+	 */
 	public static final DateTimeFormatter	DATE_TIME_FORMATTER	= DateTimeFormatter.ofPattern("HH:mm:ss");
 	
+	/**
+	 * The entry point of program execution.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		try {
 			Application app = new Application();
@@ -62,9 +103,12 @@ public class Application {
 		}
 	}
 	
-	public void configureLogging() {
+	/**
+	 * Programmatic log configuration
+	 */
+	private void configureLogging() {
 		try {
-			// Programmatic log configuration
+			
 			String pattern = "%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS.%1$tL %4$-7s [%3$s] (%2$s) %5$s %6$s%n";
 			System.setProperty("java.util.logging.SimpleFormatter.format", pattern);
 			SimpleFormatter formatter = new SimpleFormatter();

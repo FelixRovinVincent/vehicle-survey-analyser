@@ -1,5 +1,11 @@
 package com.citygovernment.vehiclesurvey.analyser.analysis;
 
+/**
+ * Enumuration to represent direction
+ * 
+ * @author Felix Rovin Vincent
+ *
+ */
 public enum Direction {
 	NORTH("Northbound"), SOUTH("Southbound");
 	private String value;

@@ -2,6 +2,12 @@ package com.citygovernment.vehiclesurvey.analyser.analysis;
 
 import java.time.LocalTime;
 
+/**
+ * Model class to represent a vehicle
+ * 
+ * @author Felix Rovin Vincent
+ *
+ */
 public class Vehicle {
 
 	private LocalTime passingTime;
@@ -32,6 +38,9 @@ public class Vehicle {
 		this.speed = f;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Vehicle [passingTime=" + passingTime + ", direction=" + direction + ", speed=" + speed + "]";
