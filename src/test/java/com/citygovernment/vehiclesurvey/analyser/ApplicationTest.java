@@ -77,7 +77,7 @@ public class ApplicationTest {
 	 * 
 	 * @param strData
 	 */
-	@Test(dataProvider = "sampleLines")
+	@Test(dataProvider = "sampleLines", enabled =false)
 	public void testSampleDataInterpretation(Stream<String> stream) {
 		try {
 			Method method = cls.getDeclaredMethod("parseDataStream", Stream.class);

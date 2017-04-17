@@ -27,8 +27,8 @@ public class SensorDataRecord {
 
 	/**
 	 * Constructor with parameters
-	 * @param sensor
-	 * @param localTime
+	 * @param sensor The sensor input
+	 * @param localTime Time at which vehicle is marked
 	 */
 	public SensorDataRecord(Sensor sensor, LocalTime localTime) {
 		super();

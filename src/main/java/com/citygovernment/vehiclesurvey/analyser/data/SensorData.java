@@ -19,5 +19,10 @@ public class SensorData {
 		return dataRecordList;
 	}
 
+	@Override
+	public String toString() {
+		return "SensorData [dataRecordList=" + dataRecordList + "]";
+	}
+
 	
 }

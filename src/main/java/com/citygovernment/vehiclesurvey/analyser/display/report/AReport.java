@@ -30,11 +30,12 @@ public abstract class AReport {
 			Integer numberOfDays) {}
 
 	/**
-	 * Compute for Morning & Evening
-	 * @param vehicleList
-	 * @param direction
-	 * @param numberOfDays
-	 * @return List<Vehicle> List of vehicles per direction
+	 * Compute for Morning and Evening.
+	 * 
+	 * @param vehicleList VehicleList to be processed
+	 * @param direction Direction
+	 * @param numberOfDays total number of days
+	 * @return List List of vehicles per direction
 	 */
 	protected List<Vehicle> computeForMorningEvening(List<Vehicle> vehicleList, Direction direction, int numberOfDays) {
 		List<Vehicle> directionWiseVehiclesList = new ArrayList();

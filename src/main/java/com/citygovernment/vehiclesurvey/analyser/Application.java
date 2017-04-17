@@ -68,7 +68,7 @@ private static Application instance;
 	
 	/**
 	 * The entry point of program execution.
-	 * @param args
+	 * @param args Command-line arguments if any to the application
 	 */
 	public static void main(String[] args) {
 		try {

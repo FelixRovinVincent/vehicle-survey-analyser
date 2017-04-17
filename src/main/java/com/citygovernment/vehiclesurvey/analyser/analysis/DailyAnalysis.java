@@ -22,5 +22,11 @@ public class DailyAnalysis {
 	public ArrayList<Vehicle> getVehiclesPassed() {
 		return vehiclesPassed;
 	}
+
+	@Override
+	public String toString() {
+		return "DailyAnalysis [day=" + day + ", vehiclesPassed=" + vehiclesPassed + "]";
+	}
+	
 	
 }
