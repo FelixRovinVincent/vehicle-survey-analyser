@@ -2,16 +2,20 @@ package com.citygovernment.vehiclesurvey.analyser.analysis;
 
 import java.time.Duration;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Level;
 
 import com.citygovernment.vehiclesurvey.analyser.Application;
+import com.citygovernment.vehiclesurvey.analyser.data.Sensor;
 import com.citygovernment.vehiclesurvey.analyser.data.SensorData;
 import com.citygovernment.vehiclesurvey.analyser.data.SensorDataRecord;
 
 /**
- * Instance of this class is used for Data analysis.
+ * Instance of this class is used to perform Data analysis.
  * 
  * @author Felix Rovin Vincent
  *
@@ -52,9 +56,9 @@ public class DataAnalyser {
 				if (lastRecord == null) {
 					// Do nothing
 				} else if (sensorDataRecord.getLocalTime().isBefore(lastRecord.getLocalTime())) {
-					currentDailyAnalysis.setDay(analysis.getDailyAnalysisList().size() + 1);
-					analysis.getDailyAnalysisList().add(currentDailyAnalysis);
 					currentDailyAnalysis = new DailyAnalysis();
+					currentDailyAnalysis.setDay(analysis.getDailyAnalysisList().size() + 1);
+					analysis.getDailyAnalysisList().add(currentDailyAnalysis);					
 				}
 				
 				switch (count++) {
@@ -78,6 +82,7 @@ public class DataAnalyser {
 							count = 1;
 						} else {
 							currentVehicle.setDirection(Direction.SOUTH);
+							firstAxleHit = sensorDataRecord.getLocalTime();
 						}
 						break;
 					case 3:
@@ -125,9 +130,8 @@ public class DataAnalyser {
 	private void setPropertiesOfVehicle(LocalTime firstAxleHit, SensorDataRecord sensorDataRecord, Vehicle currentVehicle, DailyAnalysis currentDailyAnalysis) {
 		Duration duration = Duration.between(firstAxleHit, sensorDataRecord.getLocalTime());
 		currentVehicle.setPassingTime(firstAxleHit.plus(duration.dividedBy(NUMBER_OF_AXLES)));
-		currentVehicle.setSpeed(AVERAGE_WHEEL_BASE / duration.getSeconds());
-		
+		float speed = (AVERAGE_WHEEL_BASE / duration.toMillis())*3600;
+		currentVehicle.setSpeed(new Float(String.format("%.2f", speed)));
 		currentDailyAnalysis.getVehiclesPassed().add(currentVehicle);
 	}
-	
 }

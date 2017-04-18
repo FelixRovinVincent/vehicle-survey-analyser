@@ -3,6 +3,7 @@ package com.citygovernment.vehiclesurvey.analyser;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
 import java.util.stream.Stream;
 
 import org.testng.Assert;
@@ -50,7 +51,8 @@ public class ApplicationTest {
 			SensorData sensorData = (SensorData) method.invoke(obj, stream);
 			
 			Analysis analysisResult = new DataAnalyser().analyse(sensorData);
-			//Assert that there are two days identified
+			
+			Reporter.log("Assert that there are two days identified",Level.FINE.intValue(), true);			
 			Assert.assertEquals(analysisResult.getDailyAnalysisList().size(), 2);
 			
 		} catch (Exception e) {
@@ -77,23 +79,21 @@ public class ApplicationTest {
 	 * 
 	 * @param strData
 	 */
-	@Test(dataProvider = "sampleLines", enabled =false)
+	@Test(dataProvider = "sampleLines", enabled =true)
 	public void testSampleDataInterpretation(Stream<String> stream) {
 		try {
 			Method method = cls.getDeclaredMethod("parseDataStream", Stream.class);
 			method.setAccessible(true);
 			
-			SensorData sensorData = (SensorData) method.invoke(obj, stream);
-			
-			Analysis analysisResult = new DataAnalyser().analyse(sensorData);
-			
+			SensorData sensorData = (SensorData) method.invoke(obj, stream);			
+			Analysis analysisResult = new DataAnalyser().analyse(sensorData);			
 			ArrayList<Vehicle> vehicleList = analysisResult.getDailyAnalysisList().get(0).getVehiclesPassed();
-			
-			// Assert that there were two vehicles
+					
+			Reporter.log("Assert that there were two vehicles",Level.FINE.intValue(), true);
 			Assert.assertEquals(vehicleList.size(), 2);
-			// Assert that the direction of first vehicle was North
+			Reporter.log("Assert that the direction of first vehicle was North",Level.FINE.intValue(), true);
 			Assert.assertEquals(vehicleList.get(0).getDirection(), Direction.NORTH);
-			// Assert that the direction of second vehicle was South
+			Reporter.log("Assert that the direction of second vehicle was South",Level.FINE.intValue(), true);
 			Assert.assertEquals(vehicleList.get(1).getDirection(), Direction.SOUTH);
 			
 		} catch (Exception e) {
