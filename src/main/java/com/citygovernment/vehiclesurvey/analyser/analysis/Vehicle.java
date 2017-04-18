@@ -1,5 +1,6 @@
 package com.citygovernment.vehiclesurvey.analyser.analysis;
 
+import java.math.RoundingMode;
 import java.time.LocalTime;
 
 /**
@@ -14,6 +15,7 @@ public class Vehicle {
 	private Direction direction;
 	private float speed;
 	
+		
 	public LocalTime getPassingTime() {
 		return passingTime;
 	}

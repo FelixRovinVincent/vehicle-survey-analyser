@@ -20,14 +20,16 @@ public class DataAnalyserTest {
 	
 	@BeforeClass
 	public void beforeClass() {
-		List<SensorDataRecord> testData = Arrays.asList(new SensorDataRecord(Sensor.A, LocalTime.MIDNIGHT.plus(268981, ChronoUnit.MILLIS)),
+		List<SensorDataRecord> testData = Arrays.asList(
+				new SensorDataRecord(Sensor.A, LocalTime.MIDNIGHT.plus(268981, ChronoUnit.MILLIS)),
 				new SensorDataRecord(Sensor.A, LocalTime.MIDNIGHT.plus(269123, ChronoUnit.MILLIS)), new SensorDataRecord(Sensor.A, LocalTime.MIDNIGHT.plus(604957, ChronoUnit.MILLIS)),
 				new SensorDataRecord(Sensor.B, LocalTime.MIDNIGHT.plus(604960, ChronoUnit.MILLIS)), new SensorDataRecord(Sensor.A, LocalTime.MIDNIGHT.plus(605128, ChronoUnit.MILLIS)),
-				new SensorDataRecord(Sensor.B, LocalTime.MIDNIGHT.plus(605132, ChronoUnit.MILLIS)));
+				new SensorDataRecord(Sensor.B, LocalTime.MIDNIGHT.plus(605132, ChronoUnit.MILLIS))
+				);
 		sensorData.getDataRecordList().addAll(testData);
 	}
 	
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void analyse() {
 		DataAnalyser dataAnalyser = new DataAnalyser();
 		Analysis analysis = dataAnalyser.analyse(sensorData);
@@ -39,10 +41,10 @@ public class DataAnalyserTest {
 		Assert.assertEquals(vehicleList.get(0).getDirection(), Direction.NORTH);
 		Assert.assertEquals(vehicleList.get(1).getDirection(), Direction.SOUTH);
 		// Average Speed can be calculated by using the formula: V = D/T
-		// 2.5m/142ms = 63.38 KM/hr
-		Assert.assertEquals(vehicleList.get(0).getSpeed(), 63.38);
-		// 2.5m/(171+3)ms = 51.72 KM/hr
-		Assert.assertEquals(vehicleList.get(1).getSpeed(), 51.72);
+		// (2.5m/142ms)*3600 = 63.38 KM/hr
+		Assert.assertEquals(vehicleList.get(0).getSpeed(), 63.38f);
+		// (2.5m/172ms)*3600 = 52.33 KM/hr
+		Assert.assertEquals(vehicleList.get(1).getSpeed(), 52.33f);
 	}
 	
 }
