@@ -66,7 +66,9 @@ public class PneumaticDataFileParserTest {
 			method.setAccessible(true);
 			SensorDataRecord parsedLineAsRecord = (SensorDataRecord) method.invoke(obj, line);
 			
+			Reporter.log("<br/>Verify that sensor type in a data line is read correctly.", true);
 			Assert.assertEquals(parsedLineAsRecord.getSensor(), sensorDataRecord.getSensor());
+			Reporter.log("<br/>Verify that time portion of data line is read correctly.", true);
 			Assert.assertEquals(parsedLineAsRecord.getLocalTime().getHour(), sensorDataRecord.getLocalTime().getHour());
 			Assert.assertEquals(parsedLineAsRecord.getLocalTime().getMinute(), sensorDataRecord.getLocalTime().getMinute());
 			Assert.assertEquals(parsedLineAsRecord.getLocalTime().getSecond(), sensorDataRecord.getLocalTime().getSecond());
@@ -89,7 +91,16 @@ public class PneumaticDataFileParserTest {
 			method.setAccessible(true);
 			SensorData parsedStream = (SensorData) method.invoke(obj, stream);
 			
+			Reporter.log("<br/>Test Data ->" + parsedStream , true);
+			Reporter.log("<br/>Verify that sensor type of record 1 is A" , true);
+			Assert.assertEquals(parsedStream.getDataRecordList().get(0).getSensor(), Sensor.A);
+			Reporter.log("<br/>Verify that sensor type of record 2 is A" , true);
 			Assert.assertEquals(parsedStream.getDataRecordList().get(1).getSensor(), Sensor.A);
+			Reporter.log("<br/>Verify that sensor type of record 3 is B" , true);
+			Assert.assertEquals(parsedStream.getDataRecordList().get(2).getSensor(), Sensor.B);
+			Reporter.log("<br/>Verify that sensor type of record 4 is A" , true);
+			Assert.assertEquals(parsedStream.getDataRecordList().get(3).getSensor(), Sensor.A);
+			Reporter.log("<br/>Verify that sensor type of record 5 is B" , true);
 			Assert.assertEquals(parsedStream.getDataRecordList().get(4).getSensor(), Sensor.B);
 			
 		} catch (Exception e) {
@@ -105,5 +116,6 @@ public class PneumaticDataFileParserTest {
 						Arrays.asList("A269123", "A604957", "B604960", "A605128", "B605132", "A1089807", "B1089810", "A1089948", "B1089951").stream()
 				}
 		};
-	}
+	}	
+	
 }

@@ -52,7 +52,7 @@ public class ApplicationTest {
 			
 			Analysis analysisResult = new DataAnalyser().analyse(sensorData);
 			
-			Reporter.log("Assert that there are two days identified",Level.FINE.intValue(), true);			
+			Reporter.log("Assert that there are two days identified", true);			
 			Assert.assertEquals(analysisResult.getDailyAnalysisList().size(), 2);
 			
 		} catch (Exception e) {
@@ -89,12 +89,14 @@ public class ApplicationTest {
 			Analysis analysisResult = new DataAnalyser().analyse(sensorData);			
 			ArrayList<Vehicle> vehicleList = analysisResult.getDailyAnalysisList().get(0).getVehiclesPassed();
 					
-			Reporter.log("Assert that there were two vehicles",Level.FINE.intValue(), true);
-			Assert.assertEquals(vehicleList.size(), 2);
-			Reporter.log("Assert that the direction of first vehicle was North",Level.FINE.intValue(), true);
+			Reporter.log("<br/>Assert that there were two vehicles", true);
+			Assert.assertEquals(vehicleList.size(), 3);
+			Reporter.log("<br/>Assert that the direction of first vehicle was North", true);
 			Assert.assertEquals(vehicleList.get(0).getDirection(), Direction.NORTH);
-			Reporter.log("Assert that the direction of second vehicle was South",Level.FINE.intValue(), true);
+			Reporter.log("<br/>Assert that the direction of second vehicle was South", true);
 			Assert.assertEquals(vehicleList.get(1).getDirection(), Direction.SOUTH);
+			Reporter.log("<br/>Assert that the direction of third vehicle was South", true);
+			Assert.assertEquals(vehicleList.get(2).getDirection(), Direction.SOUTH);
 			
 		} catch (Exception e) {
 			Reporter.log(e.getStackTrace().toString(), true);

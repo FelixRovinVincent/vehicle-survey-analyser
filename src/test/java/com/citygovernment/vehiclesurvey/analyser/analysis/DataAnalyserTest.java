@@ -30,27 +30,28 @@ public class DataAnalyserTest {
 				new SensorDataRecord(Sensor.A, LocalTime.MIDNIGHT.plus(605128, ChronoUnit.MILLIS)),
 				new SensorDataRecord(Sensor.B, LocalTime.MIDNIGHT.plus(605132, ChronoUnit.MILLIS))
 				);
-		sensorData.getDataRecordList().addAll(testData);
+		sensorData.getDataRecordList().addAll(testData);		
 	}
 	
 	@Test(enabled = true)
 	public void analyse() {
 		DataAnalyser dataAnalyser = new DataAnalyser();
 		Analysis analysis = dataAnalyser.analyse(sensorData);
+		Reporter.log("<br/>Test Data = "+ sensorData+"<br/>", true);
 		
-		Reporter.log("Verify that result contains analysis for only one day.",Level.FINE.intValue(), true);
+		Reporter.log("<br/>Verify that result contains analysis for only one day.", true);
 		Assert.assertEquals(analysis.getDailyAnalysisList().size(), 1);
 		ArrayList<Vehicle> vehicleList = analysis.getDailyAnalysisList().get(0).getVehiclesPassed();
-		Reporter.log("Verify that there are two vehicles identified for that day",Level.FINE.intValue(), true);
+		Reporter.log("<br/>Verify that there are two vehicles identified for that day", true);
 		Assert.assertEquals(vehicleList.size(), 2);
-		Reporter.log("Verify that the first vehicle is northbound",Level.FINE.intValue(), true);
+		Reporter.log("<br/>Verify that the first vehicle is northbound", true);
 		Assert.assertEquals(vehicleList.get(0).getDirection(), Direction.NORTH);
-		Reporter.log("Verify that the second vehicle is southbound",Level.FINE.intValue(), true);
+		Reporter.log("<br/>Verify that the second vehicle is southbound", true);
 		Assert.assertEquals(vehicleList.get(1).getDirection(), Direction.SOUTH);
-		Reporter.log("Average Speed can be calculated by using the formula: V = D/T",Level.FINE.intValue(), true);
-		Reporter.log("Verify that speed of first vehicle is (2.5m/142ms)*3600 = 63.38 KM/hr.",Level.FINE.intValue(), true);
+		Reporter.log("<br/>Average Speed can be calculated by using the formula: V = D/T", true);
+		Reporter.log("<br/>Verify that speed of first vehicle is (2.5m/142ms)*3600 = 63.38 KM/hr.", true);
 		Assert.assertEquals(vehicleList.get(0).getSpeed(), 63.38f);
-		Reporter.log("Verify that speed of second vehicle is (2.5m/172ms)*3600 = 52.33 KM/hr.",Level.FINE.intValue(), true);
+		Reporter.log("<br/>Verify that speed of second vehicle is (2.5m/172ms)*3600 = 52.33 KM/hr.", true);
 		Assert.assertEquals(vehicleList.get(1).getSpeed(), 52.33f);
 	}
 	
