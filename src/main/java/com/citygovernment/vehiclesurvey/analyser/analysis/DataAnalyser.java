@@ -29,6 +29,11 @@ public class DataAnalyser {
 	public class InvalidLineCountException extends Exception {
 		
 		/**
+		 * Serial Version UID
+		 */
+		private static final long serialVersionUID = -466316570578792284L;
+
+		/**
 		 * Constructor.
 		 * 
 		 * @param message
@@ -60,7 +65,7 @@ public class DataAnalyser {
 			currentDailyAnalysis.setDay(1);
 			analysis.getDailyAnalysisList().add(currentDailyAnalysis);
 			
-			ArrayList<SensorDataRecord> records = data.getDataRecordList();
+			ArrayList<SensorDataRecord> records = (ArrayList<SensorDataRecord>) data.getDataRecordList();
 			
 			int count = 1, index = 0;
 			SensorDataRecord lastRecord = null;

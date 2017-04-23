@@ -155,7 +155,7 @@ public abstract class AReport {
 	 */
 	protected Void postCalculationForAPeriodMethod() {
 		return null;
-	};
+	}
 	
 	/**
 	 * Every report must have a method to show the same.

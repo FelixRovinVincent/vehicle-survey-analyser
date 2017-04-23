@@ -10,13 +10,9 @@ import java.time.LocalTime;
  */
 public class SensorDataRecord {
 
-	private Sensor sensor;
 	private LocalTime localTime;
+	private Sensor		sensor;
 	
-	
-	public Sensor getSensor() {
-		return sensor;
-	}
 	
 	/**
 	 * Constructor
@@ -24,7 +20,7 @@ public class SensorDataRecord {
 	public SensorDataRecord() {
 		super();
 	}
-
+	
 	/**
 	 * Constructor with parameters
 	 * @param sensor The sensor input
@@ -36,16 +32,20 @@ public class SensorDataRecord {
 		this.localTime = localTime;
 	}
 
-	public void setSensor(Sensor sensor) {
-		this.sensor = sensor;
-	}
-	
 	public LocalTime getLocalTime() {
 		return localTime;
+	}
+
+	public Sensor getSensor() {
+		return sensor;
 	}
 	
 	public void setLocalTime(LocalTime localTime) {
 		this.localTime = localTime;
+	}
+	
+	public void setSensor(Sensor sensor) {
+		this.sensor = sensor;
 	}
 	
 	/* (non-Javadoc)

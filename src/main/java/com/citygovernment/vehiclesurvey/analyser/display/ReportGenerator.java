@@ -1,7 +1,6 @@
 
 package com.citygovernment.vehiclesurvey.analyser.display;
 
-
 import java.util.List;
 
 import com.citygovernment.vehiclesurvey.analyser.analysis.Analysis;
@@ -48,7 +47,7 @@ public class ReportGenerator {
 	 *            List of reports to be generated.
 	 */
 	public void displayReports(List<AReport> reportList) {
-		reportList.forEach((r) -> r.show(analysisResult));
+		reportList.forEach(r -> r.show(analysisResult));
 	}
 	
 }

@@ -25,11 +25,6 @@ import com.citygovernment.vehiclesurvey.analyser.data.SensorDataRecord;
 public class PneumaticDataFileParser {
 	
 	/**
-	 * Whole data containing all data lines
-	 */
-	private SensorData sensorData;
-	
-	/**
 	 * Parse a single line to a record.
 	 * 
 	 * @param dataLine
@@ -71,26 +66,32 @@ public class PneumaticDataFileParser {
 	 * @param analyseMethod
 	 *            method to analyse a single file
 	 */
-	public void parseAllFiles(String dataFolderName, Consumer<SensorData> analyseMethod) {		
+	public void parseAllFiles(String dataFolderName, Consumer<SensorData> analyseMethod) {
 		try (DirectoryStream<Path> dirStream = Files.newDirectoryStream(Paths.get(".//" + dataFolderName + "//"));) {
-			
 			for (Path path : dirStream) {
-				// read file into stream, try-with-resources
-				try (Stream<String> stream = Files.lines(path)) {
-					Application.LOGGER.info("**********************************************************************************");
-					Application.LOGGER.log(Level.INFO, () -> String.format("Data file - \"%s\"",path.getFileName()));
-					Application.LOGGER.info("**********************************************************************************");
-					
-					SensorData sensorData = this.parseDataStream(stream);
-					analyseMethod.accept(sensorData);
-					
-				} catch (Exception e) {
-					Application.LOGGER.log(Level.SEVERE, "Could not read File - " + path.toString() + "!", e);
-				}
-				
+				parseFile(analyseMethod, path);
 			}
 		} catch (IOException e1) {
 			Application.LOGGER.log(Level.SEVERE, "Incorrect Data folder.", e1);
+		}
+	}
+	
+	/**
+	 * Read file into stream using try-with-resources and parse it.
+	 * @param analyseMethod Analyse method
+	 * @param path path
+	 */
+	private void parseFile(Consumer<SensorData> analyseMethod, Path path) {
+		try (Stream<String> stream = Files.lines(path)) {
+			Application.LOGGER.info("**********************************************************************************");
+			Application.LOGGER.log(Level.INFO, () -> String.format("Data file - \"%s\"", path.getFileName()));
+			Application.LOGGER.info("**********************************************************************************");
+			
+			SensorData sensorData = this.parseDataStream(stream);
+			analyseMethod.accept(sensorData);
+			
+		} catch (Exception e) {
+			Application.LOGGER.log(Level.SEVERE, "Could not read File - " + path.toString() + "!", e);
 		}
 	}
 	
@@ -101,10 +102,10 @@ public class PneumaticDataFileParser {
 	 * @return SensorData
 	 */
 	private SensorData parseDataStream(Stream<String> stream) {
-		sensorData = new SensorData();
+		SensorData sensorData = new SensorData();
 		sensorData.getDataRecordList().clear();
 		
-		stream.forEachOrdered((strLine) -> {
+		stream.forEachOrdered(strLine -> {
 			SensorDataRecord sensorDataRecord = createDataRecord(strLine);
 			sensorData.getDataRecordList().add(sensorDataRecord);
 		});
