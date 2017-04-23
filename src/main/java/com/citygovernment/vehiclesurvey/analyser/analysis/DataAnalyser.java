@@ -18,6 +18,23 @@ import com.citygovernment.vehiclesurvey.analyser.data.SensorDataRecord;
  */
 public class DataAnalyser {
 	
+	/**
+	 * Custom exception to indicate invalid values while dividing data into two or four lines belonging to a vehicle. 
+	 * @author lordlion
+	 *
+	 */
+	public class InvalidLineCountException extends Exception {
+
+		/**
+		 * Constructor.
+		 * @param message Message.
+		 */
+		public InvalidLineCountException(String message) {
+			super(message);
+		}
+		
+	}
+
 	public static final float	AVERAGE_WHEEL_BASE	= 2.5f;
 	public static final int		MAX_SPEED_LIMIT		= 60;
 	public static final int		NUMBER_OF_AXLES		= 2;
@@ -61,9 +78,9 @@ public class DataAnalyser {
 					case 1:
 						if (!sensorDataRecord.getSensor().getValue().contentEquals("A")) {
 							if (lastRecord != null) {
-								Application.LOGGER.info("Last sensorDataRecord = " + lastRecord);
+								Application.LOGGER.log(Level.INFO,"Last sensorDataRecord = %s" , lastRecord);
 							}
-							Application.LOGGER.info("End of valid data at line " + index + "; " + sensorDataRecord);
+							Application.LOGGER.log(Level.INFO,"End of valid data at line %s" ,String.format("%d; %s.",index , sensorDataRecord.toString()) );
 							index = 0;
 							break;
 						} else {
@@ -97,7 +114,7 @@ public class DataAnalyser {
 						break;
 					
 					default:
-						throw new RuntimeException("Count can only be from 1 to 4.");
+						throw new InvalidLineCountException("Count can only be from 1 to 4.");
 				}
 				
 				if (index == 0) {

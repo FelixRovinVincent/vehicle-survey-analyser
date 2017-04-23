@@ -15,8 +15,25 @@
 		<java.version>1.8</java.version>
 		<maven.version>3.0</maven.version>
 		<testng.version>6.11</testng.version>
+		<!-- Sonar static analysis / Jacoco code coverage -->
+		<sonar.host.url>http://162.212.130.161:9000/sonar/</sonar.host.url>
+		<sonar.projectKey>${project.artifactId}</sonar.projectKey>
+		<sonar.projectName>${project.artifactId}</sonar.projectName>
+		<sonar.projectVersion>${project.version}</sonar.projectVersion>
+		<sonar.language>java</sonar.language>
+		<sonar.sources>src/main/java</sonar.sources>
+		<sonar.test>target/test-classes</sonar.test>
+		<sonar.scm.provider>git</sonar.scm.provider>		
+		<jacoco.basedir>${project.build.directory}/code-coverage</jacoco.basedir>
+		<!-- Define location of Java CodeCoverage data from Unit Tests (run using 
+			SureFire) -->
+		<sonar.jacoco.reportPath>${jacoco.basedir}/jacoco-ut.exec</sonar.jacoco.reportPath>
+		<jacoco.ut.outputdir>${jacoco.basedir}/jacoco-ut-out</jacoco.ut.outputdir>
+		<!-- Define location of Java CodeCoverage data from Integration Tests (run 
+			using Failsafe) -->
+		<sonar.jacoco.itReportPath>${jacoco.basedir}/jacoco-it.exec</sonar.jacoco.itReportPath>
+		<jacoco.it.outputdir>${jacoco.basedir}/jacoco-it-out</jacoco.it.outputdir>
 	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.testng</groupId>
@@ -111,6 +128,95 @@
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.12.4</version>
+					<configuration>
+						<reuseForks>true</reuseForks>
+						 <argLine>${sonarUnitTestArgLine}</argLine>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-failsafe-plugin</artifactId>
+					<version>2.12.4</version>
+					<configuration>
+						<reuseForks>true</reuseForks>
+						<argLine>${sonarIntegrationTestArgLine}</argLine>
+					</configuration>
+					<executions>
+						<execution>
+							<goals>
+								<goal>integration-test</goal>
+								<goal>verify</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>0.7.9</version>
+					<configuration>
+						<destFile>${basedir}/target/coverage-reports/jacoco-ut.exec</destFile>
+						<dataFile>${basedir}/target/coverage-reports/jacoco-it.exec</dataFile>
+					</configuration>
+					<executions>
+						<execution>
+							<id>pre-unit-test</id>
+							<!--<phase>test</phase> -->
+							<goals>
+								<goal>prepare-agent</goal>
+							</goals>
+							<configuration>
+								<!-- Sets the path to the file to write the execution data to. -->
+								<destFile>${sonar.jacoco.reportPath}</destFile>
+								<!-- Connection with SureFire plugin -->
+								<propertyName>sonarUnitTestArgLine</propertyName>
+							</configuration>
+						</execution>
+						<execution>
+							<id>post-unit-test</id>
+							<phase>test</phase>
+							<goals>
+								<goal>report</goal>
+							</goals>
+							<configuration>
+								<!-- Sets the path to where the execution data is located. -->
+								<dataFile>${sonar.jacoco.reportPath}</dataFile>
+								<!-- Sets the output directory for the code coverage report. -->
+								<outputDirectory>${jacoco.ut.outputdir}</outputDirectory>
+							</configuration>
+						</execution>
+						<execution>
+							<id>pre-integration-test</id>
+							<phase>pre-integration-test</phase>
+							<goals>
+								<goal>prepare-agent-integration</goal>
+							</goals>
+							<configuration>
+								<!-- Sets the path to the file to write the execution data to. -->
+								<destFile>${sonar.jacoco.itReportPath}</destFile>
+								<!-- Connection with Failsafe plugin -->
+								<propertyName>sonarIntegrationTestArgLine</propertyName>
+							</configuration>
+						</execution>
+						<execution>
+							<id>post-integration-test</id>
+							<phase>post-integration-test</phase>
+							<goals>
+								<goal>report-integration</goal>
+							</goals>
+							<configuration>
+								<!-- Sets the path to where the execution data is located. -->
+								<dataFile>${sonar.jacoco.itReportPath}</dataFile>
+								<!-- Sets the output directory for the code coverage report. -->
+								<outputDirectory>${jacoco.it.outputdir}</outputDirectory>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
 					<version>3.0.2</version>
 					<configuration>
@@ -168,11 +274,6 @@
 	<profiles>
 		<profile>
 			<id>production</id>
-			<properties>
-				<sonar.host.url>
-					http://162.212.130.161:9000/sonar/
-				</sonar.host.url>
-			</properties>
 			<build>
 				<plugins>
 					<plugin>
@@ -182,6 +283,10 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-javadoc-plugin</artifactId>
+					</plugin>
+					<plugin>
+						<groupId>org.jacoco</groupId>
+						<artifactId>jacoco-maven-plugin</artifactId>
 					</plugin>
 					<plugin>
 						<groupId>org.sonarsource.scanner.maven</groupId>

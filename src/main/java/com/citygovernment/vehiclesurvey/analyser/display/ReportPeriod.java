@@ -20,7 +20,7 @@ public enum ReportPeriod {
 	/**
 	 * The time duration of the time slice.
 	 */
-	private Duration duration;
+	private transient Duration duration;
 	
 	ReportPeriod(Duration duration) {
 		this.duration = duration;

@@ -106,7 +106,7 @@ public class Application {
 				reportGenerator.displayReports(reportsToGenerate);
 			});
 			
-			LOGGER.fine("Application End");
+			LOGGER.fine("Program execution finished!");
 			
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, "Application cannot proceed further. Please see the error logs for detailed info.", e);

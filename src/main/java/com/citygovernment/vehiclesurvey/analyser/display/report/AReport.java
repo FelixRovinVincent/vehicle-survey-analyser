@@ -41,8 +41,9 @@ public abstract class AReport {
 			File dir = new File(Application.REPORT_FOLDER_NAME);
 			dir.mkdirs();
 			File tmp = new File(dir, reportFileName);
-			tmp.createNewFile();
-			
+			if (!tmp.createNewFile()) {
+				Application.LOGGER.log(Level.SEVERE, "File create failed - ", reportFileName);
+			}
 			this.outputFilePath = Paths.get(tmp.getPath());
 			
 		} catch (IOException e) {
@@ -84,10 +85,14 @@ public abstract class AReport {
 	 * 
 	 * @param vehiclesList
 	 *            List of vehicles
-	 * @param calculationMethod
-	 *            method to perform calculation for a single period
-	 * @param numberOfDays
-	 *            Number of days data was recorded
+	 * @param preCalculationForAPeriodMethod
+	 *            Method which will be executed each time before a calculation
+	 *            is done for a period.
+	 * @param calculationForEachIntervalInPeriodMethod
+	 *            Method to perform a calculation for each interval in a period.
+	 * @param postCalculationForAPeriodMethod
+	 *            Method which will be executed each time after a calculation is
+	 *            done for a period.
 	 */
 	protected void computeForAllOtherPeriods(List<Vehicle> vehiclesList, Consumer<String> preCalculationForAPeriodMethod,
 			Function<LocalTime, Function<LocalTime, Consumer<List<Vehicle>>>> calculationForEachIntervalInPeriodMethod, Supplier<Void> postCalculationForAPeriodMethod) {

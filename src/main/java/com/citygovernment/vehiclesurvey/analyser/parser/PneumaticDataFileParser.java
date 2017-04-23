@@ -36,8 +36,8 @@ public class PneumaticDataFileParser {
 	 *            each line of data
 	 * @return
 	 */
-	private SensorDataRecord createDataRecord(String dataLine) {		
-		SensorDataRecord sensorDataRecord = new SensorDataRecord();		
+	private SensorDataRecord createDataRecord(String dataLine) {
+		SensorDataRecord sensorDataRecord = new SensorDataRecord();
 		try {
 			String strSensor = dataLine.substring(0, 1);
 			switch (strSensor) {
@@ -56,9 +56,9 @@ public class PneumaticDataFileParser {
 			LocalTime localTime = LocalTime.MIDNIGHT.plus(numberOfMillisSinceMidnight, ChronoUnit.MILLIS);
 			sensorDataRecord.setLocalTime(localTime);
 		} catch (NumberFormatException e) {
-			Application.LOGGER.log(Level.SEVERE,"Incorrect data in line -> "+dataLine,e);
+			Application.LOGGER.log(Level.SEVERE, "Incorrect data in line -> " + dataLine, e);
 			throw e;
-}
+		}
 		
 		return sensorDataRecord;
 	}
@@ -71,13 +71,8 @@ public class PneumaticDataFileParser {
 	 * @param analyseMethod
 	 *            method to analyse a single file
 	 */
-	public void parseAllFiles(String dataFolderName, Consumer<SensorData> analyseMethod) {
-		try {
-			Path dataFilePath = Paths.get(".//" + dataFolderName + "//");
-			
-			DirectoryStream<Path> dirStream;
-			
-			dirStream = Files.newDirectoryStream(dataFilePath);
+	public void parseAllFiles(String dataFolderName, Consumer<SensorData> analyseMethod) {		
+		try (DirectoryStream<Path> dirStream = Files.newDirectoryStream(Paths.get(".//" + dataFolderName + "//"));) {
 			
 			for (Path path : dirStream) {
 				// read file into stream, try-with-resources
@@ -95,7 +90,7 @@ public class PneumaticDataFileParser {
 				
 			}
 		} catch (IOException e1) {
-			Application.LOGGER.log(Level.SEVERE,"Incorrect Data folder.",e1);
+			Application.LOGGER.log(Level.SEVERE, "Incorrect Data folder.", e1);
 		}
 	}
 	
