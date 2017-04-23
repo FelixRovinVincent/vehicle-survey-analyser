@@ -116,19 +116,17 @@ This would compile, run tests and build runnable Jar file "vehicle-survey-analys
 The tests results can be found in "target/surefire-reports" folder.
 
 ### Run executable Jar file
-Navigate to the "target" folder in project from Terminal(Command Line).
+Navigate to the "target" folder in project from Terminal(Command Line). Please make sure that you place the data file to be analysed in a folder named "data" and place the folder in the same directory as that the excecutable Jar file is in.
 
 use the following command:
 ```
 java -jar vehicle-survey-analyser-0.0.1-SNAPSHOT.jar
 ```
 
-If you copy the jar file to some other location, please make sure that you place the data file to be analysed in a folder named "data" and place the folder in the same directory that the Excecutable Jar file is in.
-
 After running the jar file, there will be a "logs" folder created containing the log files and also the "report" folder containing all generated report files. 
 
 ### Note:-
-I have included an Eclipse launch configuration for convenience to quickly enable you to build the project. Right click on the project folder in Eclipse IDE and choose "Run As"-> "Maven Build". Choose "vehicle-survey-analyser - Production" configuration and it will compile, execute tests, build runnable Jar and additionally do static analysis using SonarQube. But I am not sure if it would work right away in all platforms. I have checked with Windows 10 OS and Eclipse Neon and it works. 
+I have included an Eclipse launch configuration for convenience to quickly enable you to build the project. Import the project as Eclipse project. Right click on the project folder in Eclipse IDE and choose "Run As"-> "Maven Build". Choose "vehicle-survey-analyser - Production" configuration and it will compile, execute tests, build runnable Jar and additionally do static analysis using SonarQube. But I am not sure if it would work right away in all platforms. I have checked with Windows 10 OS and Eclipse Neon and it works. 
 ## Code Quality and Tests
 
 I have used Sonar Qube to ensure Code Quality and TestNG for automated tests.
