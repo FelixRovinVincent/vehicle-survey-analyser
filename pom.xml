@@ -223,9 +223,10 @@
 						<archive>
 							<manifest>
 								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+								<mainClass>com.citygovernment.vehiclesurvey.analyser.Application</mainClass>
 							</manifest>
 						</archive>
-					</configuration>
+					</configuration>					
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
