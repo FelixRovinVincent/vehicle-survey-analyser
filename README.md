@@ -17,13 +17,20 @@ All the analysis and design documents I have created to solve the challenge are 
 2. Setup configuration management using Maven.
 3. Configure logging with java.util.logging.
 4. Add Static Analysis capability to the project.
+![SonarQube private server](http://162.212.130.161:9000/sonar/)
 5. Textual Analysis of the Problem Statement and other documents if any prepared in requirements gathering. It helps to identify and fix requirements, Actors, User stories, and most likely much of the System test cases, some of the Classes and their behaviour etc.
+[_DOCS](https://github.com/FelixRovinVincent/vehicle-survey-analyser/_DOCS/Analysis/Textual Analysis/)
+
+![UseCase Diagram](https://github.com/FelixRovinVincent/vehicle-survey-analyser/blob/master/_DOCS/Analysis/UseCaseDiagram.svg "UseCase Diagram")
+
 6. Create README to include the following deliverables:
 	a. An explanation on why I selected the chosen problem.
 	b. Clear and concise instruction on how to execute the solution to the challenge.
 7. Requirements Diagram which helps to ensure that no requirements are missed during design.
+![Requirements Diagram](https://github.com/FelixRovinVincent/vehicle-survey-analyser/blob/master/_DOCS/Analysis/RequirementDiagram.svg "Requirements Diagram")
 8. Identify and write System Test cases. The examples mentioned in the problem statement such as the explanation on how the data will be interpreted etc. are definitely System Test Case candidates.
 9. Code design using UML Class Diagram.
+![Class Diagram](https://github.com/FelixRovinVincent/vehicle-survey-analyser/blob/master/_DOCS/Design/Code%20Design/ClassDiagram.svg "Class Diagram")
 10. Write Unit Tests especially against crucial methods.
 11. Write Integration tests including negative scenarios.
 12. Write test-driven production code as implementation of the design. Running tests to confirm implementation logic, static analysis of the code followed by corrections/improvements are repeated in sequence after implementing a portion of the solution. This would be the last deliverable.
