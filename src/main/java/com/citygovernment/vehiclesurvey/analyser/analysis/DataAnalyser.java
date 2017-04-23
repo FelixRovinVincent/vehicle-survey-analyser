@@ -11,7 +11,8 @@ import com.citygovernment.vehiclesurvey.analyser.data.SensorData;
 import com.citygovernment.vehiclesurvey.analyser.data.SensorDataRecord;
 
 /**
- * Instance of this class is used to perform Data analysis or interpreting data to object model.
+ * Instance of this class is used to perform Data analysis or interpreting data
+ * to object model.
  * 
  * @author Felix Rovin Vincent
  *
@@ -19,28 +20,33 @@ import com.citygovernment.vehiclesurvey.analyser.data.SensorDataRecord;
 public class DataAnalyser {
 	
 	/**
-	 * Custom exception to indicate invalid values while dividing data into two or four lines belonging to a vehicle. 
+	 * Custom exception to indicate invalid values while dividing data into two
+	 * or four lines belonging to a vehicle.
+	 * 
 	 * @author lordlion
 	 *
 	 */
 	public class InvalidLineCountException extends Exception {
-
+		
 		/**
 		 * Constructor.
-		 * @param message Message.
+		 * 
+		 * @param message
+		 *            Message.
 		 */
 		public InvalidLineCountException(String message) {
 			super(message);
 		}
 		
 	}
-
+	
 	public static final float	AVERAGE_WHEEL_BASE	= 2.5f;
 	public static final int		MAX_SPEED_LIMIT		= 60;
 	public static final int		NUMBER_OF_AXLES		= 2;
 	
 	/**
-	 * Method to perform analysis. This would interpret the data records to vehicle instances grouped day-wise.
+	 * Method to perform analysis. This would interpret the data records to
+	 * vehicle instances grouped day-wise.
 	 * 
 	 * @param data
 	 *            Data to be analysed.
@@ -78,9 +84,11 @@ public class DataAnalyser {
 					case 1:
 						if (!sensorDataRecord.getSensor().getValue().contentEquals("A")) {
 							if (lastRecord != null) {
-								Application.LOGGER.log(Level.INFO,"Last sensorDataRecord = %s" , lastRecord);
+								final SensorDataRecord lastDataRecord = lastRecord;
+								Application.LOGGER.log(Level.INFO, () ->String.format("Last sensorDataRecord = %s", lastDataRecord));
 							}
-							Application.LOGGER.log(Level.INFO,"End of valid data at line %s" ,String.format("%d; %s.",index , sensorDataRecord.toString()) );
+							final int ind = index;
+							Application.LOGGER.log(Level.INFO, () ->String.format("End of valid data at line %d; %s.", ind, sensorDataRecord.toString()));
 							index = 0;
 							break;
 						} else {

@@ -40,7 +40,7 @@ public class DayWiseVehicleCountReport extends AReport {
 	@Override
 	public void show(Analysis analysis) {
 		try (OutputStream os = new FileOutputStream(outputFilePath.toFile()); PrintStream printStream = new PrintStream(os);) {
-			Application.LOGGER.info("Generate report file - " + outputFilePath);
+			Application.LOGGER.log(Level.INFO, () ->String.format( "Generate report file - %s", outputFilePath));
 			this.printStream = printStream;
 			printStream.print("\t*** Day-wise Vehicle Count Report ***\n");
 			for (Iterator<DailyAnalysis> iterator = analysis.getDailyAnalysisList().iterator(); iterator.hasNext();) {

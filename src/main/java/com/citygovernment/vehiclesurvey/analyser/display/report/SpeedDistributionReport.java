@@ -78,7 +78,7 @@ public class SpeedDistributionReport extends AReport {
 				return true;
 			if (obj == null)
 				return false;
-			if (!(obj instanceof PercentageOfVehiclesWithinLimit))
+			if (getClass() != obj.getClass())
 				return false;
 			PercentageOfVehiclesWithinLimit other = (PercentageOfVehiclesWithinLimit) obj;
 			if (!getOuterType().equals(other.getOuterType()))
@@ -104,7 +104,6 @@ public class SpeedDistributionReport extends AReport {
 		private SpeedDistributionReport getOuterType() {
 			return SpeedDistributionReport.this;
 		}
-		
 		
 	}
 	
@@ -206,7 +205,7 @@ public class SpeedDistributionReport extends AReport {
 	@Override
 	public void show(Analysis analysis) {
 		try (OutputStream os = new FileOutputStream(outputFilePath.toFile()); PrintStream printStream = new PrintStream(os);) {
-			Application.LOGGER.info("Generate report file - " + outputFilePath);
+			Application.LOGGER.log(Level.INFO, () ->String.format( "Generate report file - %s", outputFilePath));
 			this.printStream = printStream;
 			printStream.print("\t*** Speed Distribution Report ***\n");
 			ArrayList<Vehicle> vehicleList = new ArrayList<>();

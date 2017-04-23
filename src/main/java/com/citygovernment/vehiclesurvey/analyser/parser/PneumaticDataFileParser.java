@@ -78,7 +78,7 @@ public class PneumaticDataFileParser {
 				// read file into stream, try-with-resources
 				try (Stream<String> stream = Files.lines(path)) {
 					Application.LOGGER.info("**********************************************************************************");
-					Application.LOGGER.info("Data file - \"" + path.getFileName() + "\"");
+					Application.LOGGER.log(Level.INFO, () -> String.format("Data file - \"%s\"",path.getFileName()));
 					Application.LOGGER.info("**********************************************************************************");
 					
 					SensorData sensorData = this.parseDataStream(stream);

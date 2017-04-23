@@ -40,7 +40,7 @@ public class InterVehicularDistanceReport extends AReport {
 		try {
 			final Vehicle lastVehicle = new Vehicle();
 			vehiclesList.forEach(vehicle -> {
-				if (lastVehicle.getSpeed() != 0f) {
+				if (Math.abs(lastVehicle.getSpeed() - 0f) > 0.001f) {
 					double timeGapBetweenVehicles = (double) Duration.between(lastVehicle.getPassingTime(), vehicle.getPassingTime()).toMillis() / 1000 / 60 / 60;
 					
 					Double interVehicularDistance = timeGapBetweenVehicles * lastVehicle.getSpeed();
@@ -56,8 +56,12 @@ public class InterVehicularDistanceReport extends AReport {
 		return interVehicularDistanceList;
 	}
 	
-	/* (non-Javadoc)
-	 * @see com.citygovernment.vehiclesurvey.analyser.display.report.AReport#calculationForEachIntervalInPeriodMethod(java.time.LocalTime, java.time.LocalTime, java.util.List)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.citygovernment.vehiclesurvey.analyser.display.report.AReport#
+	 * calculationForEachIntervalInPeriodMethod(java.time.LocalTime,
+	 * java.time.LocalTime, java.util.List)
 	 */
 	@Override
 	protected void calculationForEachIntervalInPeriodMethod(LocalTime intervalStart, LocalTime intervalStop, List<Vehicle> vehiclesList) {
@@ -94,22 +98,29 @@ public class InterVehicularDistanceReport extends AReport {
 		}
 		return average;
 	}
-
-	/* (non-Javadoc)
-	 * @see com.citygovernment.vehiclesurvey.analyser.display.report.AReport#preCalculationForAPeriodMethod(java.lang.String)
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.citygovernment.vehiclesurvey.analyser.display.report.AReport#
+	 * preCalculationForAPeriodMethod(java.lang.String)
 	 */
 	@Override
 	protected void preCalculationForAPeriodMethod(String strPeriodName) {
 		printStream.print("\n\t\t\t" + strPeriodName);
 	}
-
-	/* (non-Javadoc)
-	 * @see com.citygovernment.vehiclesurvey.analyser.display.report.AReport#show(com.citygovernment.vehiclesurvey.analyser.analysis.Analysis)
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.citygovernment.vehiclesurvey.analyser.display.report.AReport#show(com
+	 * .citygovernment.vehiclesurvey.analyser.analysis.Analysis)
 	 */
 	@Override
 	public void show(Analysis analysis) {
 		try (OutputStream os = new FileOutputStream(outputFilePath.toFile()); PrintStream printStream = new PrintStream(os);) {
-			Application.LOGGER.info("Generate report file - " + outputFilePath);
+			Application.LOGGER.log(Level.INFO, () ->String.format("Generate report file - %s", outputFilePath));
 			this.printStream = printStream;
 			printStream.print("\t*** Rough distance between vehicles during various periods ***\n");
 			int dayCount = 1;
@@ -122,7 +133,8 @@ public class InterVehicularDistanceReport extends AReport {
 				printStream.print("\n\t\t\tEvening");
 				computeForEvening(dayWiseAnalysis.getVehiclesPassed(), b -> e -> v -> calculationForEachIntervalInPeriodMethod(b, e, v));
 				
-				computeForAllOtherPeriods(dayWiseAnalysis.getVehiclesPassed(), s -> preCalculationForAPeriodMethod(s), b -> e -> v -> calculationForEachIntervalInPeriodMethod(b, e, v), this::postCalculationForAPeriodMethod);
+				computeForAllOtherPeriods(dayWiseAnalysis.getVehiclesPassed(), s -> preCalculationForAPeriodMethod(s), b -> e -> v -> calculationForEachIntervalInPeriodMethod(b, e, v),
+						this::postCalculationForAPeriodMethod);
 			}
 			
 		} catch (Exception e) {

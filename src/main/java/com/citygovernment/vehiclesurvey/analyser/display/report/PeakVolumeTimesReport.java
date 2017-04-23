@@ -88,7 +88,7 @@ public class PeakVolumeTimesReport extends AReport {
 	public void show(Analysis analysis) {
 		this.analysis = analysis;
 		try (OutputStream os = new FileOutputStream(outputFilePath.toFile()); PrintStream printStream = new PrintStream(os);) {
-			Application.LOGGER.info("Generate report file - " + outputFilePath);
+			Application.LOGGER.log(Level.INFO, () ->String.format("Generate report file - %s", outputFilePath));
 			this.printStream = printStream;
 			printStream.print("\t*** Peak Volume Times Report ***");
 			int count = 1;

@@ -42,7 +42,7 @@ public abstract class AReport {
 			dir.mkdirs();
 			File tmp = new File(dir, reportFileName);
 			if (!tmp.createNewFile()) {
-				Application.LOGGER.log(Level.SEVERE, "File create failed - ", reportFileName);
+				Application.LOGGER.log(Level.INFO, () ->String.format("File create failed - %s file may be already existing.", reportFileName));
 			}
 			this.outputFilePath = Paths.get(tmp.getPath());
 			

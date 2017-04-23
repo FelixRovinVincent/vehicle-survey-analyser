@@ -17,7 +17,7 @@
 		<testng.version>6.11</testng.version>
 		<!-- Sonar static analysis / Jacoco code coverage -->
 		<sonar.host.url>http://162.212.130.161:9000/sonar/</sonar.host.url>
-		<sonar.projectKey>${project.artifactId}</sonar.projectKey>
+		<sonar.projectKey>${project.groupId}:${project.artifactId}</sonar.projectKey>
 		<sonar.projectName>${project.artifactId}</sonar.projectName>
 		<sonar.projectVersion>${project.version}</sonar.projectVersion>
 		<sonar.language>java</sonar.language>

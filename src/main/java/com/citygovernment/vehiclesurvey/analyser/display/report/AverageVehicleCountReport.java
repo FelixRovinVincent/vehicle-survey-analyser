@@ -45,7 +45,7 @@ public class AverageVehicleCountReport extends AReport{
 		
 		this.analysis = analysis;
 		try (OutputStream os = new FileOutputStream(outputFilePath.toFile()); PrintStream printStream = new PrintStream(os);) {
-			Application.LOGGER.info("Generate report file - " + outputFilePath);
+			Application.LOGGER.log(Level.INFO, () ->String.format( "Generate report file - %s", outputFilePath));
 			this.printStream = printStream;
 			printStream.print("\t*** Average Vehicle Count Report ***\n");
 			ArrayList<Vehicle> vehicleList = new ArrayList<>();
