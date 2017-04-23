@@ -123,7 +123,7 @@ use the following command:
 java -jar vehicle-survey-analyser-0.0.1-SNAPSHOT.jar
 ```
 ### View reports
-After running the jar file, there will be a "logs" folder created containing the log files and also the "report" folder containing all generated report files. For best viewing experience, use WordPad with WordWrap set to "No Wrap". The reports can be viewed by any text editors since they are simple txt files.
+After running the jar file, there will be a "logs" folder created containing the log files and also the "report" folder containing all generated report files. Both folders are created in the same directory as that the excecutable Jar file is in. For best viewing experience, use WordPad with WordWrap set to "No Wrap". The reports can be viewed by any text editors since they are simple txt files.
 
 ### Note:-
 I have included an Eclipse launch configuration for convenience to quickly enable you to build the project. Import the project as Eclipse project. Right click on the project folder in Eclipse IDE and choose "Run As"-> "Maven Build". Choose "vehicle-survey-analyser - Production" configuration and it will compile, execute tests, build runnable Jar and additionally do static analysis using SonarQube. But I am not sure if it would work right away in all platforms. I have checked with Windows 10 OS and Eclipse Neon and it works. 
