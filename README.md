@@ -42,7 +42,7 @@ All the analysis and design documents I have created to solve the challenge are 
 11. Write Integration tests including negative scenarios.
 12. Write test-driven production code as implementation of the design. Running tests to confirm implementation logic, static analysis of the code followed by corrections/improvements are repeated in sequence after implementing a portion of the solution. This would be the last deliverable.
 13. Refactor code. There will always be room for improvement. But, hopefully the refactoring will be minimum as otherwise it would be a sign of poor application design.
-14. Ensure everything is OK. Submit the solution via email including the link to GitHub repo..
+14. Ensure everything is OK. Submit the solution via email including the link to GitHub repo.
 
 ## Getting Started
 
@@ -170,7 +170,7 @@ TestNG is a testing framework inspired from JUnit and NUnit but introducing some
 
 ## Authors
 
-* **Felix Rovin Vincent** 
+* **Felix Rovin Vincent**  
 
 
 ## Acknowledgments
