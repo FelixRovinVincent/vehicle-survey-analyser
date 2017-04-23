@@ -31,7 +31,7 @@ public class AverageVehicleCountReportTest {
 	}
 	
 	/**
-	 * Tests counting of vehicles.
+	 * Tests average counting of vehicles.
 	 * 
 	 * @param vehiclesList
 	 *            List of vehicles.

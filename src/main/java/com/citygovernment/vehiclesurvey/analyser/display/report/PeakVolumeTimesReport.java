@@ -21,7 +21,7 @@ public class PeakVolumeTimesReport extends AReport {
 	 * @author lordlion
 	 *
 	 */
-	private class PeakTime {
+	protected class PeakTime {
 		private LocalTime	intervalStart;
 		private LocalTime	intervalStop;
 		private long		vehiclesPassedInInterval;
@@ -35,8 +35,21 @@ public class PeakVolumeTimesReport extends AReport {
 		public PeakTime(LocalTime intervalStart, LocalTime intervalStop, long vehiclesPassedInInterval) {
 			this.intervalStart = intervalStart;
 			this.intervalStop = intervalStop;
-			this.vehiclesPassedInInterval = vehiclesPassedInInterval;
+			this.vehiclesPassedInInterval =vehiclesPassedInInterval;
 		}
+
+		public long getVehiclesPassedInInterval() {
+			return vehiclesPassedInInterval;
+		}
+
+		public LocalTime getIntervalStart() {
+			return intervalStart;
+		}
+
+		public LocalTime getIntervalStop() {
+			return intervalStop;
+		}
+		
 	}
 	
 	/**
