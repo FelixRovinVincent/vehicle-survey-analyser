@@ -41,11 +41,11 @@ public class AverageVehicleCountReportTest {
 	@Test(dataProvider = "findAverageCountTestData", enabled = true)
 	public void findAverageCount(List<Vehicle> vehiclesList, int numberOfDays, long actualcount) {
 		try {
-			Method method = cls.getDeclaredMethod("findAverageCount", List.class);
+			Method method = cls.getDeclaredMethod("findAverageCount", List.class,int.class);
 			method.setAccessible(true);
 			long averageCountOfVehicles = (long) method.invoke(obj, vehiclesList, numberOfDays);
 			
-			Reporter.log("<br/>Verify count with actual.", true);
+			Reporter.log("<br/>Verify average count with actual - "+actualcount, true);
 			Assert.assertEquals(averageCountOfVehicles, actualcount);
 		} catch (Exception e) {
 			Reporter.log(e.getStackTrace().toString(), true);
@@ -84,7 +84,7 @@ public class AverageVehicleCountReportTest {
 				}, {
 						vehicleList1, 2, 2
 				}, {
-						vehicleList2, 2, 13
+						vehicleList2, 2, 12
 				}, {
 						vehicleList3, 4, 25
 				}, {

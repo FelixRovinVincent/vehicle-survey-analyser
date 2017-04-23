@@ -3,9 +3,7 @@ package com.citygovernment.vehiclesurvey.analyser.display.report;
 import java.lang.reflect.Method;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map.Entry;
 
 import org.testng.Assert;
 import org.testng.Reporter;
@@ -13,7 +11,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import com.citygovernment.vehiclesurvey.analyser.Application;
 import com.citygovernment.vehiclesurvey.analyser.analysis.Vehicle;
 import com.citygovernment.vehiclesurvey.analyser.display.report.PeakVolumeTimesReport.PeakTime;
 
@@ -38,64 +35,66 @@ public class PeakVolumeTimesReportTest {
 	}
 	
 	/**
+	 * Tests average counting of vehicles.
+	 * 
+	 * @param vehiclesList
+	 *            List of vehicles.
+	 * @param count
+	 *            vehicle count.
+	 */
+	@Test(dataProvider = "findAverageCountTestData", enabled = true)
+	public void findAverageCount(List<Vehicle> vehiclesList, int numberOfDays, long actualcount) {
+		try {
+			Method method = cls.getDeclaredMethod("findAverageCount", List.class, int.class);
+			method.setAccessible(true);
+			long averageCountOfVehicles = (long) method.invoke(peakVolumeTimesReport, vehiclesList, numberOfDays);
+			
+			Reporter.log("<br/>Verify count with actual.", true);
+			Assert.assertEquals(averageCountOfVehicles, actualcount);
+		} catch (Exception e) {
+			Reporter.log(e.getStackTrace().toString(), true);
+			e.printStackTrace();
+		}
+	}
+	
+	/**
 	 * Few sample vehicle lists and their actual counts.
 	 * 
 	 * @return Object[][] Test Data.
 	 */
 	@DataProvider
-	public Object[][] recordPeakTimeTestData() {
+	public Object[][] findAverageCountTestData() {
+		ArrayList<Vehicle> vehicleList1 = new ArrayList<>();
+		for (int i = 0; i < 4; i++) {
+			vehicleList1.add(new Vehicle());
+		}
+		
+		ArrayList<Vehicle> vehicleList2 = new ArrayList<>();
+		for (int i = 0; i < 25; i++) {
+			vehicleList2.add(new Vehicle());
+		}
+		
+		ArrayList<Vehicle> vehicleList3 = new ArrayList<>();
+		for (int i = 0; i < 100; i++) {
+			vehicleList3.add(new Vehicle());
+		}
 		return new Object[][] {
 				new Object[] {
-						LocalTime.MIN, LocalTime.NOON, 7, "Northbound", peakVolumeTimesReport.new PeakTime(LocalTime.MIN, LocalTime.NOON, 7)
+						vehicleList1, 1, 4
 				}, {
-						LocalTime.NOON, LocalTime.MIDNIGHT, 70, "Northbound", peakVolumeTimesReport.new PeakTime(LocalTime.NOON, LocalTime.MIDNIGHT, 70)
+						vehicleList2, 1, 25
 				}, {
-						LocalTime.MIN, LocalTime.NOON, 10, "Northbound", peakVolumeTimesReport.new PeakTime(LocalTime.NOON, LocalTime.MIDNIGHT, 70)
+						vehicleList3, 1, 100
 				}, {
-						LocalTime.MIN, LocalTime.NOON, 7, "Southbound", peakVolumeTimesReport.new PeakTime(LocalTime.MIN, LocalTime.NOON, 7)
+						vehicleList1, 2, 2
 				}, {
-						LocalTime.NOON, LocalTime.MIDNIGHT, 70, "Southbound", peakVolumeTimesReport.new PeakTime(LocalTime.NOON, LocalTime.MIDNIGHT, 70)
+						vehicleList2, 2, 12
 				}, {
-						LocalTime.MIN, LocalTime.NOON, 10, "Southbound", peakVolumeTimesReport.new PeakTime(LocalTime.NOON, LocalTime.MIDNIGHT, 70)
+						vehicleList3, 4, 25
 				}, {
-						LocalTime.MIN, LocalTime.NOON, 1, "Northbound", peakVolumeTimesReport.new PeakTime(LocalTime.NOON, LocalTime.MIDNIGHT, 70)
-				}, {
-						LocalTime.MIN, LocalTime.NOON, 100, "Northbound", peakVolumeTimesReport.new PeakTime(LocalTime.NOON, LocalTime.MIDNIGHT, 100)
+						vehicleList3, 5, 20
 				}
 		};
-	}
-	
-	/**
-	 * This method checks if recording peak times is correct.
-	 * 
-	 * @param intervalStart
-	 *            Start of interval.
-	 * @param intervalStop
-	 *            End of interval.
-	 * @param vehiclesPassedInInterval
-	 *            Vehicles passed in interval.
-	 * @param strDirection
-	 *            direction.
-	 * @param actualcount
-	 *            Actual peak.
-	 */
-	@Test(dataProvider = "recordPeakTimeTestData", enabled = true)
-	public void recordPeakTime(LocalTime intervalStart, LocalTime intervalStop, long vehiclesPassedInInterval, String strDirection, PeakTime actualPeak) {
-		try {
-			Method method = cls.getDeclaredMethod("recordPeakTime", LocalTime.class, LocalTime.class, long.class, String.class);
-			method.setAccessible(true);
-			method.invoke(peakVolumeTimesReport, intervalStart, intervalStop, vehiclesPassedInInterval, strDirection);
-			
-			PeakTime peakTime = peakVolumeTimesReport.peakVolumeTotalPeriodMap.get(strDirection);
-			
-			Reporter.log("<br/>Verify peak with actual.", true);
-			Assert.assertEquals(peakTime.getIntervalStart(), actualPeak.getIntervalStart());
-			Assert.assertEquals(peakTime.getIntervalStop(), actualPeak.getIntervalStop());
-			Assert.assertEquals(peakTime.getVehiclesPassedInInterval(), actualPeak.getVehiclesPassedInInterval());
-		} catch (Exception e) {
-			Reporter.log(e.getStackTrace().toString(), true);
-			e.printStackTrace();
-		}
 	}
 	
 	/**
@@ -154,22 +153,32 @@ public class PeakVolumeTimesReportTest {
 	}
 	
 	/**
-	 * Tests average counting of vehicles.
+	 * This method checks if recording peak times is correct.
 	 * 
-	 * @param vehiclesList
-	 *            List of vehicles.
-	 * @param count
-	 *            vehicle count.
+	 * @param intervalStart
+	 *            Start of interval.
+	 * @param intervalStop
+	 *            End of interval.
+	 * @param vehiclesPassedInInterval
+	 *            Vehicles passed in interval.
+	 * @param strDirection
+	 *            direction.
+	 * @param actualcount
+	 *            Actual peak.
 	 */
-	@Test(dataProvider = "findAverageCountTestData", enabled = true)
-	public void findAverageCount(List<Vehicle> vehiclesList, int numberOfDays, long actualcount) {
+	@Test(dataProvider = "recordPeakTimeTestData", enabled = true)
+	public void recordPeakTime(LocalTime intervalStart, LocalTime intervalStop, long vehiclesPassedInInterval, String strDirection, PeakTime actualPeak) {
 		try {
-			Method method = cls.getDeclaredMethod("findAverageCount", List.class);
+			Method method = cls.getDeclaredMethod("recordPeakTime", LocalTime.class, LocalTime.class, long.class, String.class);
 			method.setAccessible(true);
-			long averageCountOfVehicles = (long) method.invoke(peakVolumeTimesReport, vehiclesList, numberOfDays);
+			method.invoke(peakVolumeTimesReport, intervalStart, intervalStop, vehiclesPassedInInterval, strDirection);
 			
-			Reporter.log("<br/>Verify count with actual.", true);
-			Assert.assertEquals(averageCountOfVehicles, actualcount);
+			PeakTime peakTime = peakVolumeTimesReport.peakVolumeTotalPeriodMap.get(strDirection);
+			
+			Reporter.log("<br/>Verify peak with actual.", true);
+			Assert.assertEquals(peakTime.getIntervalStart(), actualPeak.getIntervalStart());
+			Assert.assertEquals(peakTime.getIntervalStop(), actualPeak.getIntervalStop());
+			Assert.assertEquals(peakTime.getVehiclesPassedInInterval(), actualPeak.getVehiclesPassedInInterval());
 		} catch (Exception e) {
 			Reporter.log(e.getStackTrace().toString(), true);
 			e.printStackTrace();
@@ -182,36 +191,24 @@ public class PeakVolumeTimesReportTest {
 	 * @return Object[][] Test Data.
 	 */
 	@DataProvider
-	public Object[][] findAverageCountTestData() {
-		ArrayList<Vehicle> vehicleList1 = new ArrayList<>();
-		for (int i = 0; i < 4; i++) {
-			vehicleList1.add(new Vehicle());
-		}
-		
-		ArrayList<Vehicle> vehicleList2 = new ArrayList<>();
-		for (int i = 0; i < 25; i++) {
-			vehicleList2.add(new Vehicle());
-		}
-		
-		ArrayList<Vehicle> vehicleList3 = new ArrayList<>();
-		for (int i = 0; i < 100; i++) {
-			vehicleList3.add(new Vehicle());
-		}
+	public Object[][] recordPeakTimeTestData() {
 		return new Object[][] {
 				new Object[] {
-						vehicleList1, 1, 4
+						LocalTime.MIN, LocalTime.NOON, 7, "Northbound", peakVolumeTimesReport.new PeakTime(LocalTime.MIN, LocalTime.NOON, 7)
 				}, {
-						vehicleList2, 1, 25
+						LocalTime.NOON, LocalTime.MIDNIGHT, 70, "Northbound", peakVolumeTimesReport.new PeakTime(LocalTime.NOON, LocalTime.MIDNIGHT, 70)
 				}, {
-						vehicleList3, 1, 100
+						LocalTime.MIN, LocalTime.NOON, 10, "Northbound", peakVolumeTimesReport.new PeakTime(LocalTime.NOON, LocalTime.MIDNIGHT, 70)
 				}, {
-						vehicleList1, 2, 2
+						LocalTime.MIN, LocalTime.NOON, 7, "Southbound", peakVolumeTimesReport.new PeakTime(LocalTime.MIN, LocalTime.NOON, 7)
 				}, {
-						vehicleList2, 2, 13
+						LocalTime.NOON, LocalTime.MIDNIGHT, 70, "Southbound", peakVolumeTimesReport.new PeakTime(LocalTime.NOON, LocalTime.MIDNIGHT, 70)
 				}, {
-						vehicleList3, 4, 25
+						LocalTime.MIN, LocalTime.NOON, 10, "Southbound", peakVolumeTimesReport.new PeakTime(LocalTime.NOON, LocalTime.MIDNIGHT, 70)
 				}, {
-						vehicleList3, 5, 20
+						LocalTime.MIN, LocalTime.NOON, 1, "Northbound", peakVolumeTimesReport.new PeakTime(LocalTime.NOON, LocalTime.MIDNIGHT, 70)
+				}, {
+						LocalTime.MIN, LocalTime.NOON, 100, "Northbound", peakVolumeTimesReport.new PeakTime(LocalTime.MIN, LocalTime.NOON, 100)
 				}
 		};
 	}

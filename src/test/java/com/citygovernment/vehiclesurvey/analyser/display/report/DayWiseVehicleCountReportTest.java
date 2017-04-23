@@ -45,7 +45,7 @@ public class DayWiseVehicleCountReportTest {
 			method.setAccessible(true);
 			long countOfVehicles = (long) method.invoke(obj, vehiclesList);
 			
-			Reporter.log("<br/>Verify count with actual.", true);
+			Reporter.log("<br/>Verify count with actual - "+actualcount, true);
 			Assert.assertEquals(countOfVehicles, actualcount);
 		} catch (Exception e) {
 			Reporter.log(e.getStackTrace().toString(), true);
