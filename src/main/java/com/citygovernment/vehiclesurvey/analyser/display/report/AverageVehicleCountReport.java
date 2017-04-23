@@ -5,32 +5,60 @@ import java.util.List;
 
 import com.citygovernment.vehiclesurvey.analyser.analysis.Analysis;
 import com.citygovernment.vehiclesurvey.analyser.analysis.Vehicle;
-import com.citygovernment.vehiclesurvey.analyser.display.ReportPeriod;
 
 /**
- * Total vehicle counts in each direction: averages across all the days.
+ * Report to output average vehicle counts across all the days in each direction: morning versus evening, per hour, per half hour, per 20 minutes, and per 15 minutes.
  * 
- * @author Felix Rovin Vincent
+ * @author lordlion
  *
  */
 public class AverageVehicleCountReport extends AReport{
+
+	/**
+	 * Analysis instance kept to find number of days.
+	 */
+	private Analysis analysis;
+
+	/**
+	 * Constructor with report file name as parameter.
+	 */
+	public AverageVehicleCountReport() {
+		super("AverageVehicleCountReport.txt");
+	}
+	
+	
+	/* (non-Javadoc)
+	 * @see com.citygovernment.vehiclesurvey.analyser.display.report.AReport#calculationForEachIntervalInPeriodMethod(java.time.LocalTime, java.time.LocalTime, java.util.List)
+	 */
+	@Override
+	protected void calculationForEachIntervalInPeriodMethod(LocalTime intervalStart, LocalTime intervalStop, List<Vehicle> vehiclesList) {
+
+		}
+	
+	
+	/**
+	 * Finds average number of vehicles in the provided list.
+	 * @param vehiclesList List of vehicles.
+	 * @return Count of vehicles.
+	 */
+	private long findAverageCount(List<Vehicle> vehiclesList, int numberOfDays) {
+				//TODO
+		return 0;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.citygovernment.vehiclesurvey.analyser.display.report.AReport#preCalculationForAPeriodMethod(java.lang.String)
+	 */
+	@Override
+	protected void preCalculationForAPeriodMethod(String strPeriodName) {
+		// TODO
+	}
 
 	/* (non-Javadoc)
 	 * @see com.citygovernment.vehiclesurvey.analyser.display.report.AReport#show(com.citygovernment.vehiclesurvey.analyser.analysis.Analysis)
 	 */
 	@Override
 	public void show(Analysis analysis) {
-		
-		System.out.println("\n\t*** Average Vehicle Count Report ***");
-		}
-	
-	/**
-	 * Method to calculate the average count across all days.
-	 * @param numberOfDays Number of days data is recorded.
-	 * @param period report period.
-	 * @param intervalStart Interval Start.
-	 * @param intervalStop Interval Stop.
-	 * @param vehiclesList List of vehicles on which count is performed.
-	 */
-	private void count(long numberOfDays, ReportPeriod period, LocalTime intervalStart, LocalTime intervalStop, List<Vehicle> vehiclesList) {}
+		// TODO
+	}
 }

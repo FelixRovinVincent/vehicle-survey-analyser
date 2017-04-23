@@ -1,6 +1,5 @@
 package com.citygovernment.vehiclesurvey.analyser.analysis;
 
-import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -11,12 +10,18 @@ import java.util.ArrayList;
  */
 public class Analysis {
 
+	/**
+	 * List of day-wise analysis results. 
+	 */
 	private ArrayList<DailyAnalysis> dailyAnalysisList = new ArrayList<>();
 		
 	public ArrayList<DailyAnalysis> getDailyAnalysisList() {
 		return dailyAnalysisList;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Analysis [dailyAnalysisList=" + dailyAnalysisList + "]";

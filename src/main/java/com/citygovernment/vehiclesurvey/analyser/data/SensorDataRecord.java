@@ -53,7 +53,7 @@ public class SensorDataRecord {
 	 */
 	@Override
 	public String toString() {
-		return "SensorDataRecord [sensor=" + sensor + ", localTime=" + localTime + "]";
+		return "\n\tSensorDataRecord [sensor=" + sensor + ", localTime=" + localTime + "]";
 	}
 
 }

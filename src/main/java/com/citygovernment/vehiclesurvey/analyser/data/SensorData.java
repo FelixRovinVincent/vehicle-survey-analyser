@@ -21,7 +21,7 @@ public class SensorData {
 
 	@Override
 	public String toString() {
-		return "SensorData [dataRecordList=" + dataRecordList + "]";
+		return "\nSensorData [dataRecordList=" + dataRecordList + "\n\t]";
 	}
 
 	

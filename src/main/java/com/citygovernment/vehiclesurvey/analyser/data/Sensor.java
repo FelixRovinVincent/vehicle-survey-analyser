@@ -1,7 +1,7 @@
 package com.citygovernment.vehiclesurvey.analyser.data;
 
 /**
- * Enumuration to represent Sensor
+ * Enumuration to represent Sensor Type.
  * 
  * @author Felix Rovin Vincent
  *

@@ -6,7 +6,8 @@ import com.citygovernment.vehiclesurvey.analyser.analysis.Analysis;
 import com.citygovernment.vehiclesurvey.analyser.display.report.AReport;
 
 /**
- * Class which takes in an analysis result as input having methods to generate reports.
+ * Class which takes in an analysis result as input. It has methods to generate
+ * reports.
  * 
  * @author Felix Rovin Vincent
  *
@@ -21,28 +22,31 @@ public class ReportGenerator {
 	/**
 	 * Constructor of ReportGenerator.
 	 * 
-	 * @param analysisResult Analysis result fed as input.
+	 * @param analysisResult
+	 *            Analysis result fed as input.
 	 */
 	public ReportGenerator(Analysis analysisResult) {
-		this.analysisResult =analysisResult;
+		this.analysisResult = analysisResult;
 	}
 	
 	/**
 	 * Method to generate a single report.
 	 * 
-	 * @param report The report to be generated.
+	 * @param report
+	 *            The report to be generated.
 	 */
 	public void displayReport(AReport report) {
-		report.show(analysisResult);		
+		report.show(analysisResult);
 	}
 	
 	/**
 	 * Method to generate a multiple reports specified as a list.
 	 * 
-	 * @param reportList List of reports to be generated.
+	 * @param reportList
+	 *            List of reports to be generated.
 	 */
 	public void displayReports(List<AReport> reportList) {
-		reportList.forEach((r)->r.show(analysisResult));			
+		reportList.forEach((r) -> r.show(analysisResult));
 	}
-
+	
 }

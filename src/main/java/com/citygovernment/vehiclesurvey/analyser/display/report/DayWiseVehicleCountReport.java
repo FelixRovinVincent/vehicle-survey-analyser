@@ -5,33 +5,68 @@ import java.util.List;
 
 import com.citygovernment.vehiclesurvey.analyser.analysis.Analysis;
 import com.citygovernment.vehiclesurvey.analyser.analysis.Vehicle;
-import com.citygovernment.vehiclesurvey.analyser.display.ReportPeriod;
 
 /**
- * Class representing day-wise vehicle count report.
+ * Report to output Day-wise vehicle counts in each direction: morning versus
+ * evening, per hour, per half hour, per 20 minutes, and per 15 minutes.
  * 
- * @author Felix Rovin Vincent
+ * @author lordlion
  *
  */
 public class DayWiseVehicleCountReport extends AReport {
 	
-	/* (non-Javadoc)
-	 * @see com.citygovernment.vehiclesurvey.analyser.display.report.AReport#show(com.citygovernment.vehiclesurvey.analyser.analysis.Analysis)
+	/**
+	 * Constructor with report file name as parameter.
+	 */
+	public DayWiseVehicleCountReport() {
+		super("DayWiseVehicleCountReport.txt");
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.citygovernment.vehiclesurvey.analyser.display.report.AReport#
+	 * calculationForEachIntervalInPeriodMethod(java.time.LocalTime,
+	 * java.time.LocalTime, java.util.List)
 	 */
 	@Override
-	public void show(Analysis analysis) {
-		System.out.println("\n\t*** Day-wise Vehicle Count Report***");		
-	//TODO
-		
+	protected void calculationForEachIntervalInPeriodMethod(LocalTime intervalStart, LocalTime intervalStop, List<Vehicle> vehiclesList) {
+		// TODO
 	}
 	
 	/**
-	 * Method to calculate the count per day.
-	 * @param numberOfDays Number of days data is recorded.
-	 * @param period report period.
-	 * @param intervalStart Interval Start.
-	 * @param intervalStop Interval Stop.
-	 * @param vehiclesList List of vehicles on which count is performed.
+	 * Counts number of vehicles in the provided list.
+	 * 
+	 * @param vehiclesList
+	 *            List of vehicles.
+	 * @return Count of vehicles.
 	 */
-	private void count(long numberOfDays, ReportPeriod period, LocalTime intervalStart, LocalTime intervalStop, List<Vehicle> vehiclesList) {}
+	private long findCount(List<Vehicle> vehiclesList) {
+		// TODO
+		return 0;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.citygovernment.vehiclesurvey.analyser.display.report.AReport#
+	 * preCalculationForAPeriodMethod(java.lang.String)
+	 */
+	@Override
+	protected void preCalculationForAPeriodMethod(String strPeriodName) {
+		// TODO
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.citygovernment.vehiclesurvey.analyser.display.report.AReport#show(com
+	 * .citygovernment.vehiclesurvey.analyser.analysis.Analysis)
+	 */
+	@Override
+	public void show(Analysis analysis) {
+		// TODO
+	}
+	
 }

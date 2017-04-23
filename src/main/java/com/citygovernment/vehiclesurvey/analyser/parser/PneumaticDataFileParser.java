@@ -30,21 +30,37 @@ public class PneumaticDataFileParser {
 	private SensorData sensorData;
 	
 	/**
-	 * Parse a single data file
+	 * Parse a single line to a record.
 	 * 
-	 * @param stream
-	 * @return SensorData
+	 * @param dataLine
+	 *            each line of data
+	 * @return
 	 */
-	private SensorData parseDataStream(Stream<String> stream) {
-		sensorData = new SensorData();
-		sensorData.getDataRecordList().clear();
+	private SensorDataRecord createDataRecord(String dataLine) {		
+		SensorDataRecord sensorDataRecord = new SensorDataRecord();		
+		try {
+			String strSensor = dataLine.substring(0, 1);
+			switch (strSensor) {
+				case "A":
+					sensorDataRecord.setSensor(Sensor.A);
+					break;
+				case "B":
+					sensorDataRecord.setSensor(Sensor.B);
+					break;
+				
+				default:
+					throw new IllegalArgumentException("No such Sensor - " + strSensor);
+			}
+			
+			long numberOfMillisSinceMidnight = Long.parseUnsignedLong(dataLine.substring(1).trim());
+			LocalTime localTime = LocalTime.MIDNIGHT.plus(numberOfMillisSinceMidnight, ChronoUnit.MILLIS);
+			sensorDataRecord.setLocalTime(localTime);
+		} catch (NumberFormatException e) {
+			Application.LOGGER.log(Level.SEVERE,"Incorrect data in line -> "+dataLine,e);
+			throw e;
+}
 		
-		stream.forEachOrdered((strLine) -> {
-			SensorDataRecord sensorDataRecord = createDataRecord(strLine);
-			sensorData.getDataRecordList().add(sensorDataRecord);
-		});
-		
-		return sensorData;
+		return sensorDataRecord;
 	}
 	
 	/**
@@ -66,9 +82,9 @@ public class PneumaticDataFileParser {
 			for (Path path : dirStream) {
 				// read file into stream, try-with-resources
 				try (Stream<String> stream = Files.lines(path)) {
-					System.out.println("**********************************************************************************");
-					System.out.println("Data file - \"" + path.getFileName() + "\"");
-					System.out.println("**********************************************************************************");
+					Application.LOGGER.info("**********************************************************************************");
+					Application.LOGGER.info("Data file - \"" + path.getFileName() + "\"");
+					Application.LOGGER.info("**********************************************************************************");
 					
 					SensorData sensorData = this.parseDataStream(stream);
 					analyseMethod.accept(sensorData);
@@ -79,40 +95,26 @@ public class PneumaticDataFileParser {
 				
 			}
 		} catch (IOException e1) {
-			Application.LOGGER.severe("");
-			e1.printStackTrace();
+			Application.LOGGER.log(Level.SEVERE,"Incorrect Data folder.",e1);
 		}
 	}
 	
 	/**
-	 * Parse a single line to a record
+	 * Parse a single data file.
 	 * 
-	 * @param dataLine
-	 *            each line of data
-	 * @return
+	 * @param stream
+	 * @return SensorData
 	 */
-	private SensorDataRecord createDataRecord(String dataLine) {
+	private SensorData parseDataStream(Stream<String> stream) {
+		sensorData = new SensorData();
+		sensorData.getDataRecordList().clear();
 		
-		SensorDataRecord sensorDataRecord = new SensorDataRecord();
+		stream.forEachOrdered((strLine) -> {
+			SensorDataRecord sensorDataRecord = createDataRecord(strLine);
+			sensorData.getDataRecordList().add(sensorDataRecord);
+		});
 		
-		String strSensor = dataLine.substring(0, 1);
-		switch (strSensor) {
-			case "A":
-				sensorDataRecord.setSensor(Sensor.A);
-				break;
-			case "B":
-				sensorDataRecord.setSensor(Sensor.B);
-				break;
-			
-			default:
-				throw new IllegalArgumentException("No such Sensor - " + strSensor);
-		}
-		
-		long numberOfMillisSinceMidnight = Long.parseUnsignedLong(dataLine.substring(1).trim());
-		LocalTime localTime = LocalTime.MIDNIGHT.plus(numberOfMillisSinceMidnight, ChronoUnit.MILLIS);
-		sensorDataRecord.setLocalTime(localTime);
-		
-		return sensorDataRecord;
-	}	
+		return sensorData;
+	}
 	
 }
